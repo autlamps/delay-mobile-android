@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="495dp"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
+
+    <TabHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/Trips"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/editText"
+                        android:layout_width="300dp"
+                        android:layout_height="64dp"
+                        android:layout_marginLeft="160px"
+                        android:layout_marginTop="40dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Trip1" />
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="300dp"
+                        android:layout_height="64dp"
+                        android:layout_marginLeft="160px"
+                        android:layout_marginTop="24dp"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Trip2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Subscription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <CheckedTextView
+                        android:id="@+id/checkedTrip1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60px"
+                        android:layout_marginTop="40dp"
+                        android:layout_weight="0.05"
+                        android:checked="false"
+                        android:text="Bus Route: 745"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="30sp" />
+
+                    <CheckedTextView
+                        android:id="@+id/checkedTrip2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60px"
+                        android:layout_marginTop="40px"
+                        android:layout_weight="0.10"
+                        android:text="Bus Route: 719"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:textSize="30sp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </TabHost>
+
+</RelativeLayout>

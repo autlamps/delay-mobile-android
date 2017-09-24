@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Delayed</string>
+    <string name="api_url">dev.delayed.nz/users</string>
+</resources>
