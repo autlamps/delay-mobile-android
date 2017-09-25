@@ -1,50 +1,108 @@
 package com.example.izaac.delayed.models;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-/**
- * Created by izaac on 25/09/2017.
- */
+ import com.google.gson.annotations.Expose;
+ import com.google.gson.annotations.SerializedName;
 
 public class TokenResponse {
 
-   /* @SerializedName("user_id")
+    @SerializedName("success")
     @Expose
-    private String user_id;
-    @SerializedName("auth_token")
+    private Boolean success;
+    @SerializedName("errors")
     @Expose
-    private String auth_token;
+    private Object errors;
+    @SerializedName("result")
+    @Expose
+    private Result result;
+    @SerializedName("meta")
+    @Expose
+    private Meta meta;
 
-    public String getUser_id() {
-        return user_id;
+    public Boolean getSuccess() {
+        return success;
     }
 
-    public String getAuth_token() {
-        return auth_token;
-    }*/
-
-    private String user_id;
-    private String auth_token;
-
-    public String getUser_id() {
-        return user_id;
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public Object getErrors() {
+        return errors;
     }
 
-    public String getAuth_token() {
-        return auth_token;
+    public void setErrors(Object errors) {
+        this.errors = errors;
     }
 
-    public void setAuth_token(String auth_token) {
-        this.auth_token = auth_token;
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 
 
+    public class Result {
+
+        @SerializedName("user_id")
+        @Expose
+        private String userId;
+        @SerializedName("auth_token")
+        @Expose
+        private String authToken;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getAuthToken() {
+            return authToken;
+        }
+
+        public void setAuthToken(String authToken) {
+            this.authToken = authToken;
+        }
+
+    }
+
+    public class Meta {
+
+        @SerializedName("version")
+        @Expose
+        private String version;
+        @SerializedName("by")
+        @Expose
+        private String by;
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public String getBy() {
+            return by;
+        }
+
+        public void setBy(String by) {
+            this.by = by;
+        }
 
 
-
+    }
 }

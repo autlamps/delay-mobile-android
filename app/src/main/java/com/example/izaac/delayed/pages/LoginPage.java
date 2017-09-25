@@ -1,4 +1,4 @@
-package com.example.izaac.delayed;
+package com.example.izaac.delayed.pages;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
+import com.example.izaac.delayed.models.AuthTokens;
 import com.example.izaac.delayed.models.Login;
 import com.example.izaac.delayed.models.TokenResponse;
 
@@ -22,6 +24,9 @@ public class LoginPage extends AppCompatActivity {
 
     private EditText UserEmail;
     private EditText UserPassword;
+    private String LoginEmail;
+    private String LoginPassword;
+    AuthTokens authTokens = new AuthTokens();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +64,31 @@ public class LoginPage extends AppCompatActivity {
     private void login() {
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("dev.delayed.nz/tokens")
+                .baseUrl("https://dev.delayed.nz")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
         DelayApi delayApi = retrofit.create(DelayApi.class);
 
-        String email =  UserEmail.getText().toString();
-        String password = UserPassword.getText().toString();
+        LoginEmail  =  UserEmail.getText().toString().trim();
+        LoginPassword = UserPassword.getText().toString().trim();
 
-        Login login = new Login(email, password);
+        Login login = new Login(LoginEmail, LoginPassword);
         Call<TokenResponse> call = delayApi.login(login);
 
         call.enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+
+                System.out.println("Hello");
                 if (response.isSuccessful()) {
-                    Toast.makeText(LoginPage.this, response.body().getAuth_token(), Toast.LENGTH_SHORT).show();
-                    token = response.body().getAuth_token();
+                    Toast.makeText(LoginPage.this, "Login Correct", Toast.LENGTH_SHORT).show();
+                    token = response.body().getResult().getAuthToken();
+                    authTokens.setToken(response.body().getResult().getAuthToken());
+
+                    Intent intent = new Intent(LoginPage.this, homePage.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else {
                     Toast.makeText(LoginPage.this, "Login not correct", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.izaac.delayed;
+package com.example.izaac.delayed.pages;
 
 
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 
+import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
 import com.example.izaac.delayed.models.TokenRequest;
 import com.example.izaac.delayed.models.TokenResponse;

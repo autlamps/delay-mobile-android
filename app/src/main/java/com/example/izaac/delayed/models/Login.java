@@ -5,12 +5,12 @@ package com.example.izaac.delayed.models;
  */
 
 public class Login {
-    private String user;
+    private String email;
     private String password;
 
 
-    public Login(String user, String password) {
-        this.user = user;
+    public Login(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 }
