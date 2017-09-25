@@ -9,7 +9,7 @@ public class NextStopDetails {
     private String name;
     private double lat;
     private double lon;
-    private double delay;
+    private int delay;
     private String scheduled_arrival;
     private String eta;
 
@@ -46,7 +46,7 @@ public class NextStopDetails {
         this.lon = lon;
     }
 
-    public double getDelay() {
+    public int getDelay() {
         return delay;
     }
 

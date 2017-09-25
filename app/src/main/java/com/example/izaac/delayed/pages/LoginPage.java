@@ -1,6 +1,8 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,13 +22,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.app.PendingIntent.getActivity;
+
 public class LoginPage extends AppCompatActivity {
 
     private EditText UserEmail;
     private EditText UserPassword;
     private String LoginEmail;
     private String LoginPassword;
-    AuthTokens authTokens = new AuthTokens();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private static String token;
+    public static String token;
 
     private void login() {
 
@@ -84,7 +87,8 @@ public class LoginPage extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(LoginPage.this, "Login Correct", Toast.LENGTH_SHORT).show();
                     token = response.body().getResult().getAuthToken();
-                    authTokens.setToken(response.body().getResult().getAuthToken());
+
+                   // AuthTokens authTokens = new AuthTokens(response.body().getResult().getAuthToken());
 
                     Intent intent = new Intent(LoginPage.this, homePage.class);
                     startActivity(intent);

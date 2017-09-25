@@ -1,13 +1,11 @@
 package com.example.izaac.delayed.pages;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.izaac.delayed.R;
@@ -30,6 +28,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.izaac.delayed.pages.LoginPage.token;
+
 public class homePage extends AppCompatActivity {
 
     private EditText Trip1;
@@ -40,7 +40,7 @@ public class homePage extends AppCompatActivity {
     RouteDetails routeDetails = new RouteDetails();
     NextStopDetails nextStopDetails = new NextStopDetails();
     public static ArrayList<NextStopDetails> NSDetails = new ArrayList<NextStopDetails>();
-    AuthTokens authTokens = new AuthTokens();
+    //AuthTokens authTokens = new AuthTokens();
 
 
    /// @SuppressLint("WrongViewCast")
@@ -72,10 +72,10 @@ public class homePage extends AppCompatActivity {
 
     public void selectTrip() {
 
-        Interceptor interceptor = new Interceptor() {
+       /* Interceptor interceptor = new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder().addHeader("User-Agent", "Delay-Android-0.1").addHeader("X-DELAY-AUTH", authTokens.getToken()).build();
+                Request newRequest = chain.request().newBuilder().addHeader("X-DELAY-AUTH", token).build();
                 return chain.proceed(newRequest);
             }
         };
@@ -83,13 +83,27 @@ public class homePage extends AppCompatActivity {
 // Add the interceptor to OkHttpClient
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.interceptors().add(interceptor);
-        OkHttpClient client = builder.build();
+        OkHttpClient client = builder.build();*/
+
+       OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
+
+        okhttpBuilder.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request request = chain.request();
+
+                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", token);
+
+                return chain.proceed(newRequest.build());
+            }
+        });
 
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://dev.delayed.nz")
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
+                .client(okhttpBuilder.build())
                 .build();
 
         DelayApi delayApi = retrofit.create(DelayApi.class);
@@ -97,7 +111,7 @@ public class homePage extends AppCompatActivity {
         SelectedTrip1 = Trip1.getText().toString().trim();
         SelectedTrip2 = Trip2.getText().toString().trim();
 
-        Trip trip = new Trip("X-DELAY-AUTH", authTokens.getToken());
+        Trip trip = new Trip("X-DELAY-AUTH", token);
         Call<DelayResponse> call = delayApi.trip(trip);
 
         call.enqueue(new Callback<DelayResponse>() {
@@ -107,7 +121,7 @@ public class homePage extends AppCompatActivity {
                 System.out.println("Hello");
                 if (response.isSuccessful()) {
                     Toast.makeText(homePage.this, "Trips Selected", Toast.LENGTH_SHORT).show();
-
+                    System.out.println("test");
                     //routeDetails.setRouteSName(response.body().getResult().getTrips()[]);
                     //routeDetails.setNSDetails(response.body().getResult().getTrips());
                     //RouteDetails routeDetails = new RouteDetails(SelectedTrip1, SelectedTrip2);

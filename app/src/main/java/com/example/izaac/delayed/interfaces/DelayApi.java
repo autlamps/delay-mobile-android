@@ -8,6 +8,7 @@ import com.example.izaac.delayed.models.Trip;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -19,7 +20,7 @@ public interface DelayApi {
     @POST("tokens")
     Call<TokenResponse> login(@Body Login login);
 
-    @POST("delays")
+    @GET("delays")
     Call<DelayResponse> trip(@Body Trip trip);
 
 

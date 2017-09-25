@@ -8,6 +8,10 @@ public class AuthTokens {
 
     private String Token;
 
+    public AuthTokens (String Token) {
+        this.Token = Token;
+    }
+
     public String getToken() {
         return Token;
     }
