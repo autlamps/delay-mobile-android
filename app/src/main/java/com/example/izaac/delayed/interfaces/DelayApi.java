@@ -21,7 +21,7 @@ public interface DelayApi {
     Call<TokenResponse> login(@Body Login login);
 
     @GET("delays")
-    Call<DelayResponse> trip(@Body Trip trip);
+    Call<DelayResponse> trip();
 
 
 }

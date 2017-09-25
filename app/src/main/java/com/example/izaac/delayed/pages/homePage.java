@@ -38,7 +38,6 @@ public class homePage extends AppCompatActivity {
     private String SelectedTrip1;
     private String SelectedTrip2;
     RouteDetails routeDetails = new RouteDetails();
-    NextStopDetails nextStopDetails = new NextStopDetails();
     public static ArrayList<NextStopDetails> NSDetails = new ArrayList<NextStopDetails>();
     //AuthTokens authTokens = new AuthTokens();
 
@@ -111,8 +110,8 @@ public class homePage extends AppCompatActivity {
         SelectedTrip1 = Trip1.getText().toString().trim();
         SelectedTrip2 = Trip2.getText().toString().trim();
 
-        Trip trip = new Trip("X-DELAY-AUTH", token);
-        Call<DelayResponse> call = delayApi.trip(trip);
+       // Trip trip = new Trip("X-DELAY-AUTH", token);
+        Call<DelayResponse> call = delayApi.trip();
 
         call.enqueue(new Callback<DelayResponse>() {
             @Override
@@ -125,13 +124,16 @@ public class homePage extends AppCompatActivity {
                     //routeDetails.setRouteSName(response.body().getResult().getTrips()[]);
                     //routeDetails.setNSDetails(response.body().getResult().getTrips());
                     //RouteDetails routeDetails = new RouteDetails(SelectedTrip1, SelectedTrip2);
-                    for (int i =0; i < response.body().getResult().getTrips().size(); i++) {
+                    for (int i = 0; i < response.body().getResult().getTrips().size(); i++) {
+                        NextStopDetails nextStopDetails = new NextStopDetails();
+
                         nextStopDetails.setName(response.body().getResult().getTrips().get(i).getNextStop().getName());
                         nextStopDetails.setDelay(response.body().getResult().getTrips().get(i).getNextStop().getDelay());
                         nextStopDetails.setEta(response.body().getResult().getTrips().get(i).getNextStop().getEta());
                         nextStopDetails.setId(response.body().getResult().getTrips().get(i).getNextStop().getId());
                         nextStopDetails.setLat(response.body().getResult().getTrips().get(i).getNextStop().getLat());
-                        nextStopDetails.getLon(response.body().getResult().getTrips().get(i).getNextStop().getLon());
+                        nextStopDetails.setLon(response.body().getResult().getTrips().get(i).getNextStop().getLon());
+                        nextStopDetails.setScheduled_arrival(response.body().getResult().getTrips().get(i).getNextStop().getScheduledArrival());
                         NSDetails.add(nextStopDetails);
 
                     }
