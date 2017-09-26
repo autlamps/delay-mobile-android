@@ -9,20 +9,20 @@
     tools:context="com.example.izaac.delayed.pages.TabbedPages">
 
     <TextView
-        android:id="@+id/trip1_long_name"
+        android:id="@+id/trip_short_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textAlignment="center"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/trip1_delay_time"
+        android:id="@+id/trip_long_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:layout_below="@+id/trip1_long_name"
+        android:layout_below="@+id/trip_short_name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/trip2_long_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/trip1_delay_time"
+        android:layout_below="@+id/trip_long_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
         android:textAlignment="center"

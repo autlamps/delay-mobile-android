@@ -7,7 +7,7 @@
     tools:context="com.example.izaac.delayed.pages.TripPage">
 
     <EditText
-        android:id="@+id/trip1_long_name"
+        android:id="@+id/trip_short_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="18dp"
@@ -20,7 +20,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/trip1_delay_time"
+        android:id="@+id/trip_long_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="14dp"
@@ -28,7 +28,45 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:layout_below="@+id/trip1_long_name"
+        android:layout_below="@+id/trip_short_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/trip_delay"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/trip_long_name"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/trip_next_stop"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/trip_delay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/trip_eta"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_below="@+id/trip_next_stop"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
