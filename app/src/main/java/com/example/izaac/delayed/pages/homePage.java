@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
-import com.example.izaac.delayed.models.AuthTokens;
 import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.NextStopDetails;
 import com.example.izaac.delayed.models.RouteDetails;
 import com.example.izaac.delayed.models.Trip;
+import com.example.izaac.delayed.models.TripDetails;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,16 +34,16 @@ import static com.example.izaac.delayed.pages.LoginPage.token;
 public class homePage extends AppCompatActivity {
 
     private EditText Trip1;
-    private EditText Trip2;
+    private EditText AmountOfTrips;
     private Button NextButton;
-    private String SelectedTrip1;
+    private String SelectedTrip;
     private String SelectedTrip2;
     RouteDetails routeDetails = new RouteDetails();
     public static ArrayList<NextStopDetails> NSDetails = new ArrayList<NextStopDetails>();
-    //AuthTokens authTokens = new AuthTokens();
+    public static ArrayList<Trip> BaseTripDetails = new ArrayList<Trip>();
+    TripDetails tripDetails = new TripDetails();
 
 
-   /// @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,9 @@ public class homePage extends AppCompatActivity {
         System.out.println("jello");
 
         Trip1 = (EditText) findViewById(R.id.trip1text);
-        Trip2 = (EditText) findViewById(R.id.trip2text);
+        AmountOfTrips = (EditText) findViewById(R.id.tripAmount);
+
+        AmountOfTrips.setText("AT Delays" ,TextView.BufferType.EDITABLE);
 
         NextButton = (Button) findViewById(R.id.nextButton);
 
@@ -63,26 +66,9 @@ public class homePage extends AppCompatActivity {
         });
 
 
-
-
     }
 
-    //RouteDetails routeDetails = new RouteDetails();
-
     public void selectTrip() {
-
-       /* Interceptor interceptor = new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder().addHeader("X-DELAY-AUTH", token).build();
-                return chain.proceed(newRequest);
-            }
-        };
-
-// Add the interceptor to OkHttpClient
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.interceptors().add(interceptor);
-        OkHttpClient client = builder.build();*/
 
        OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
 
@@ -107,10 +93,9 @@ public class homePage extends AppCompatActivity {
 
         DelayApi delayApi = retrofit.create(DelayApi.class);
 
-        SelectedTrip1 = Trip1.getText().toString().trim();
-        SelectedTrip2 = Trip2.getText().toString().trim();
+        SelectedTrip = Trip1.getText().toString().trim();
+        tripDetails.setTrip(SelectedTrip);
 
-       // Trip trip = new Trip("X-DELAY-AUTH", token);
         Call<DelayResponse> call = delayApi.trip();
 
         call.enqueue(new Callback<DelayResponse>() {
@@ -126,6 +111,16 @@ public class homePage extends AppCompatActivity {
                     //RouteDetails routeDetails = new RouteDetails(SelectedTrip1, SelectedTrip2);
                     for (int i = 0; i < response.body().getResult().getTrips().size(); i++) {
                         NextStopDetails nextStopDetails = new NextStopDetails();
+                        Trip trip = new Trip();
+
+                        trip.setTrip_id(response.body().getResult().getTrips().get(i).getTripId());
+                        trip.setRoute_id(response.body().getResult().getTrips().get(i).getRouteId());
+                        trip.setRoute_short_name(response.body().getResult().getTrips().get(i).getRouteShortName());
+                        trip.setRoute_long_name(response.body().getResult().getTrips().get(i).getRouteLongName());
+                        trip.setVehicle_id(response.body().getResult().getTrips().get(i).getVehicleId());
+                        trip.setLatitude(response.body().getResult().getTrips().get(i).getLat());
+                        trip.setLongitude(response.body().getResult().getTrips().get(i).getLon());
+                        BaseTripDetails.add(trip);
 
                         nextStopDetails.setName(response.body().getResult().getTrips().get(i).getNextStop().getName());
                         nextStopDetails.setDelay(response.body().getResult().getTrips().get(i).getNextStop().getDelay());

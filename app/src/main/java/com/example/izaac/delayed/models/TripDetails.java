@@ -8,7 +8,16 @@ import java.util.ArrayList;
 
 public class TripDetails {
 
-   private String trip1;
-    private  String trip2;
+    private String trip1;
+
+    public void setTrip(String trip1) {
+        this.trip1 = trip1;
+    }
+
+    public String getTrip() {
+        return trip1;
+    }
+
+
 
 }

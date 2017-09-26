@@ -10,48 +10,26 @@
         android:id="@+id/trip1_long_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="18dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/trip1_delay_time"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="24sp"
         android:layout_below="@+id/trip1_long_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
-        android:id="@+id/trip2_long_name"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/trip1_delay_time"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/trip2_delay_time"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/trip2_long_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="24sp" />
 </RelativeLayout>

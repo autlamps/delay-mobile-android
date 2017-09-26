@@ -21,10 +21,6 @@
         <activity android:name=".pages.createAccount" />
         <activity android:name=".pages.homePage" />
         <activity android:name=".pages.RegisterAccount" />
-        <activity
-            android:name=".pages.TabbedPages"
-            android:label="@string/title_activity_tabbed_pages"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".pages.TripPage"></activity>
     </application>
 
