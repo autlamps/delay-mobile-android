@@ -33,15 +33,15 @@ import static com.example.izaac.delayed.pages.LoginPage.token;
 
 public class homePage extends AppCompatActivity {
 
-    private EditText Trip1;
+    private EditText Trip;
     private EditText AmountOfTrips;
     private Button NextButton;
-    private String SelectedTrip;
-    private String SelectedTrip2;
     RouteDetails routeDetails = new RouteDetails();
     public static ArrayList<NextStopDetails> NSDetails = new ArrayList<NextStopDetails>();
     public static ArrayList<Trip> BaseTripDetails = new ArrayList<Trip>();
-    TripDetails tripDetails = new TripDetails();
+    public static ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
+    public static String selectedTrip;
+    private int numberOfServices;
 
 
     @Override
@@ -51,7 +51,7 @@ public class homePage extends AppCompatActivity {
 
         System.out.println("jello");
 
-        Trip1 = (EditText) findViewById(R.id.trip1text);
+        Trip = (EditText) findViewById(R.id.trip1text);
         AmountOfTrips = (EditText) findViewById(R.id.tripAmount);
 
         AmountOfTrips.setText("AT Delays" ,TextView.BufferType.EDITABLE);
@@ -93,8 +93,10 @@ public class homePage extends AppCompatActivity {
 
         DelayApi delayApi = retrofit.create(DelayApi.class);
 
-        SelectedTrip = Trip1.getText().toString().trim();
-        tripDetails.setTrip(SelectedTrip);
+        selectedTrip = Trip.getText().toString().trim();
+
+        //tripDetails.setTrip(Trip.getText().toString().trim());
+        //routeDetails.setTrip(Trip.getText().toString().trim());
 
         Call<DelayResponse> call = delayApi.trip();
 
@@ -106,9 +108,7 @@ public class homePage extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(homePage.this, "Trips Selected", Toast.LENGTH_SHORT).show();
                     System.out.println("test");
-                    //routeDetails.setRouteSName(response.body().getResult().getTrips()[]);
-                    //routeDetails.setNSDetails(response.body().getResult().getTrips());
-                    //RouteDetails routeDetails = new RouteDetails(SelectedTrip1, SelectedTrip2);
+
                     for (int i = 0; i < response.body().getResult().getTrips().size(); i++) {
                         NextStopDetails nextStopDetails = new NextStopDetails();
                         Trip trip = new Trip();
@@ -131,6 +131,11 @@ public class homePage extends AppCompatActivity {
                         nextStopDetails.setScheduled_arrival(response.body().getResult().getTrips().get(i).getNextStop().getScheduledArrival());
                         NSDetails.add(nextStopDetails);
 
+                        if(BaseTripDetails.get(i).getRoute_short_name().equalsIgnoreCase(selectedTrip))
+                        {
+                            tripLocationInArray.add(i);
+                        }
+
                     }
 
                     Intent intent = new Intent(homePage.this, TripPage.class);
@@ -149,6 +154,19 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public int checkNumberOfServices() {
+
+        if(tripLocationInArray.size() == 1) {
+            numberOfServices = 1;
+        }
+        else if(tripLocationInArray.size() > 1) {
+            numberOfServices = tripLocationInArray.size();
+        }
+
+        return numberOfServices;
     }
 
 }

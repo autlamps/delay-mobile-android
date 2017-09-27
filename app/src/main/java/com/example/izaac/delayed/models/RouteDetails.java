@@ -10,6 +10,17 @@ public class RouteDetails {
 
     private String routeSName;
     private String routeDelayTime;
+    private String trip;
+
+    public String getTrip()
+    {
+        return trip;
+    }
+
+    public void setTrip(String trip)
+    {
+        this.trip = trip;
+    }
 
     public String getRouteSName() {
         return routeSName;

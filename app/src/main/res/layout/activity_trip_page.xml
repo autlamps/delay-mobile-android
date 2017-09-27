@@ -16,21 +16,25 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:layout_alignParentTop="true"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/trip_long_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/trip_short_name"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryDark"
         android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_below="@+id/trip_short_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/trip_delay"
@@ -42,8 +46,10 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/trip_next_stop"
@@ -55,19 +61,23 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/trip_eta"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/trip_next_stop"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryDark"
         android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_below="@+id/trip_next_stop"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

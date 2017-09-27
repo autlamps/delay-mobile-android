@@ -1,5 +1,6 @@
 package com.example.izaac.delayed.models;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -8,16 +9,20 @@ import java.util.ArrayList;
 
 public class TripDetails {
 
-    private String trip1;
+    private String trip;
+    private ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
 
-    public void setTrip(String trip1) {
-        this.trip1 = trip1;
+
+    public ArrayList<Integer> getTripLocationInArray() {
+        return tripLocationInArray;
+    }
+
+    public void setTrip(String trip) {
+        this.trip = trip;
     }
 
     public String getTrip() {
-        return trip1;
+        return trip;
     }
-
-
 
 }
