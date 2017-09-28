@@ -69,7 +69,7 @@ public class TripPage extends AppCompatActivity {
 
 
         }
-        else {
+        else  {
 
             Trip_delay = (EditText) findViewById(R.id.trip_delay);
             trip_delay_text = "Trip Delay: " + Float.toString(delay) + " Minutes";

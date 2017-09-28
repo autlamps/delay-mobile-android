@@ -138,9 +138,20 @@ public class homePage extends AppCompatActivity {
 
                     }
 
-                    Intent intent = new Intent(homePage.this, TripPage.class);
-                    startActivity(intent);
-                    finish();
+                  //  checkNumberOfServices();
+
+                    System.out.println("h");
+
+                    if(tripLocationInArray.size() == 1) {
+                        Intent intent = new Intent(homePage.this, TripPage.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else if(tripLocationInArray.size() > 1) {
+                        Intent intent = new Intent(homePage.this, MultiTripPage.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
                 else {
                     Toast.makeText(homePage.this, "Invalid Trip ID", Toast.LENGTH_SHORT).show();
@@ -164,6 +175,10 @@ public class homePage extends AppCompatActivity {
         }
         else if(tripLocationInArray.size() > 1) {
             numberOfServices = tripLocationInArray.size();
+        }
+        else if(tripLocationInArray.size() == 0)
+        {
+            numberOfServices = 0;
         }
 
         return numberOfServices;

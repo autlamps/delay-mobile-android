@@ -21,7 +21,8 @@
         <activity android:name=".pages.createAccount" />
         <activity android:name=".pages.homePage" />
         <activity android:name=".pages.RegisterAccount" />
-        <activity android:name=".pages.TripPage"></activity>
+        <activity android:name=".pages.TripPage" />
+        <activity android:name=".pages.MultiTripPage"></activity>
     </application>
 
 </manifest>
