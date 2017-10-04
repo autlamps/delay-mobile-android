@@ -50,13 +50,19 @@ public class TripPage extends AppCompatActivity {
         System.out.println("stop");
         trip_text = "Trip ID: " + selectedTrip;
 
+        /*Heading Text*/
+
         TripHeading = (EditText) findViewById(R.id.trip_short_name);
         TripHeading.setText(trip_text, TextView.BufferType.EDITABLE);
         TripHeading.setEnabled(false);
 
+        /*Setting the trips long name*/
+
         Trip_long_name = (EditText) findViewById(R.id.trip_long_name);
         Trip_long_name.setText(BaseTripDetails.get(tripNumber).getRoute_long_name(), TextView.BufferType.EDITABLE);
 
+
+        /*Setting the Delays in Text*/
 
         if(delayInMinutes < 0) {
 
@@ -77,14 +83,16 @@ public class TripPage extends AppCompatActivity {
             Trip_delay.setEnabled(false);
             delay = 0;
 
-
         }
 
+        /*Setting the Next Stop trip text*/
 
         Trip_next_stop = (EditText) findViewById(R.id.trip_next_stop);
         trip_ns_text = "Next Stop: " + NSDetails.get(tripNumber).getName();
         Trip_next_stop.setText(trip_ns_text, TextView.BufferType.EDITABLE);
         Trip_next_stop.setEnabled(false);
+
+        /*Setting the Next Stop ETA text*/
 
         Trip_eta = (EditText) findViewById(R.id.trip_eta);
         trip_eta_text = "Eta: " + NSDetails.get(tripNumber).getEta();
@@ -92,6 +100,8 @@ public class TripPage extends AppCompatActivity {
         Trip_eta.setEnabled(false);
 
     }
+
+    /*converting the delay from seconds to minutes*/
 
     public float convertDelayToMinutes() {
 

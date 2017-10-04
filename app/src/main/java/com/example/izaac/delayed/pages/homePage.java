@@ -148,7 +148,7 @@ public class homePage extends AppCompatActivity {
                         finish();
                     }
                     else if(tripLocationInArray.size() > 1) {
-                        Intent intent = new Intent(homePage.this, MultiTripPage.class);
+                        Intent intent = new Intent(homePage.this, DelayListActivity.class);
                         startActivity(intent);
                         finish();
                     }

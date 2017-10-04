@@ -1,14 +1,17 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.izaac.delayed.R;
 
 import static com.example.izaac.delayed.pages.homePage.BaseTripDetails;
+import static com.example.izaac.delayed.pages.homePage.selectedTrip;
 import static com.example.izaac.delayed.pages.homePage.tripLocationInArray;
 
 public class MultiTripPage extends AppCompatActivity {
@@ -22,6 +25,10 @@ public class MultiTripPage extends AppCompatActivity {
     String Trip3_Details;
     String Trip4_Details;
     private int tripSize;
+    Button Trip1_button;
+    Button Trip2_button;
+    Button Trip3_button;
+    Button Trip4_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,14 @@ public class MultiTripPage extends AppCompatActivity {
         tripSize = tripLocationInArray.size();
 
         System.out.println("text");
+
+        Trip1_button = (Button) findViewById(R.id.trip1_button);
+
+        Trip2_button = (Button) findViewById(R.id.trip2_button);
+
+        Trip3_button = (Button) findViewById(R.id.trip3_button);
+
+        Trip4_button = (Button) findViewById(R.id.trip4_button);
 
         while(tripSize > 0)
         {
@@ -51,6 +66,7 @@ public class MultiTripPage extends AppCompatActivity {
                 Trip2_text = (EditText) findViewById(R.id.trip2_text);
                 Trip2_text.setText(Trip2_Details, TextView.BufferType.EDITABLE);
                 Trip2_text.setEnabled(false);
+                Trip2_button = (Button) findViewById(R.id.trip2_button);
 
                 if(tripSize == 3) {
                     Trip4_text.setVisibility(View.GONE);
@@ -70,7 +86,6 @@ public class MultiTripPage extends AppCompatActivity {
                 Trip3_text = (EditText) findViewById(R.id.trip3_text);
                 Trip3_text.setText(Trip3_Details, TextView.BufferType.EDITABLE);
                 Trip3_text.setEnabled(false);
-                //Trip4_text.setVisibility(View.GONE);
 
                 if(tripSize == 4) {
                     Trip4_text.setVisibility(View.GONE);
@@ -93,5 +108,37 @@ public class MultiTripPage extends AppCompatActivity {
         }
 
 
+
+        Trip1_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTrip = BaseTripDetails.get(tripLocationInArray.get(0)).getRoute_short_name();
+
+                Intent intent = new Intent(MultiTripPage.this, TripPage.class);
+                startActivity(intent);
+
+            }
+        });
+        Trip2_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTrip = BaseTripDetails.get(tripLocationInArray.get(1)).getRoute_short_name();
+
+                Intent intent = new Intent(MultiTripPage.this, TripPage.class);
+                startActivity(intent);
+            }
+        });
+        Trip3_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedTrip = BaseTripDetails.get(tripLocationInArray.get(2)).getRoute_short_name();
+
+                Intent intent = new Intent(MultiTripPage.this, TripPage.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
+
 }

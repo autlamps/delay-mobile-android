@@ -53,4 +53,37 @@
         android:inputType="textMultiLine"
         android:textStyle="bold"
         android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/trip1_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/trip1_text"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/trip2_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/trip2_text"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/trip3_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/trip3_text"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/trip4_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/trip4_text"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 </RelativeLayout>

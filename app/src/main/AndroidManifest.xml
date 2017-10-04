@@ -22,7 +22,9 @@
         <activity android:name=".pages.homePage" />
         <activity android:name=".pages.RegisterAccount" />
         <activity android:name=".pages.TripPage" />
-        <activity android:name=".pages.MultiTripPage"></activity>
+        <activity android:name=".pages.MultiTripPage" />
+        <activity android:name=".pages.TripRecyclerView" />
+        <activity android:name=".pages.DelayListActivity"></activity>
     </application>
 
 </manifest>
