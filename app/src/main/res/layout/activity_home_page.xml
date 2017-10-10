@@ -8,19 +8,6 @@
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
 
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="119dp" />
-
     <EditText
         android:id="@+id/trip1text"
         android:layout_width="match_parent"
@@ -44,7 +31,33 @@
         android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:text="Delays"
         android:textAlignment="center"
         android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="italic"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="119dp" />
+
+    <Button
+        android:id="@+id/delayListButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/nextButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/nextButton"
+        android:layout_marginBottom="24dp"
+        android:text="Delays"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="italic"/>
 
 </RelativeLayout>

@@ -9,7 +9,15 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rec_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="450dp" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/rec_list"
+        android:layout_marginTop="42dp"
+        android:text="Search Trips" />
 
 
 </RelativeLayout>

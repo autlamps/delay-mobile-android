@@ -11,9 +11,11 @@ import com.example.izaac.delayed.models.RouteDetails;
 import com.example.izaac.delayed.models.Trip;
 import com.example.izaac.delayed.models.TripDetails;
 
+import static com.example.izaac.delayed.pages.DelayListActivity.recyclerViewUserSelection;
 import static com.example.izaac.delayed.pages.homePage.BaseTripDetails;
 import static com.example.izaac.delayed.pages.homePage.NSDetails;
 import static com.example.izaac.delayed.pages.homePage.selectedTrip;
+import static com.example.izaac.delayed.pages.homePage.tripLocationInArray;
 
 public class TripPage extends AppCompatActivity {
 
@@ -59,7 +61,7 @@ public class TripPage extends AppCompatActivity {
         /*Setting the trips long name*/
 
         Trip_long_name = (EditText) findViewById(R.id.trip_long_name);
-        Trip_long_name.setText(BaseTripDetails.get(tripNumber).getRoute_long_name(), TextView.BufferType.EDITABLE);
+        Trip_long_name.setText(BaseTripDetails.get(tripLocationInArray.get(recyclerViewUserSelection)).getRoute_long_name(), TextView.BufferType.EDITABLE);
 
 
         /*Setting the Delays in Text*/
@@ -110,15 +112,11 @@ public class TripPage extends AppCompatActivity {
         return delayInMinutes;
     }
 
+    //returns the tripNumber variable
 
     public int checkSelectedTrip() {
-        for(int x = 0; x < BaseTripDetails.size(); x++) {
-            if(BaseTripDetails.get(x).getRoute_short_name().equalsIgnoreCase(selectedTrip))
-            {
-                tripNumber = x;
-            }
 
-        }
+        tripNumber = tripLocationInArray.get(recyclerViewUserSelection);
 
         return tripNumber;
 

@@ -23,6 +23,17 @@ public class DelayAdapter extends RecyclerView.Adapter<DelayAdapter.DelayHolder>
 
     private List<ListItem> listData;
     private LayoutInflater layoutInflater;
+    public static int recylerListTripAdapterLocation;
+
+    private ItemClickCallBack itemClickCallBack;
+
+    public interface ItemClickCallBack {
+        void onItemClick(int p);
+    }
+
+    public void setItemClickCallBack (final ItemClickCallBack itemClickCallBack) {
+        this.itemClickCallBack = itemClickCallBack;
+    }
 
     public DelayAdapter(List<ListItem> listData, Context c) {
         this.layoutInflater = LayoutInflater.from(c);
@@ -53,7 +64,7 @@ public class DelayAdapter extends RecyclerView.Adapter<DelayAdapter.DelayHolder>
         return listData.size();
     }
 
-    class DelayHolder extends RecyclerView.ViewHolder {
+    class DelayHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView title;
         private ImageView icon;
@@ -65,6 +76,14 @@ public class DelayAdapter extends RecyclerView.Adapter<DelayAdapter.DelayHolder>
             title = (TextView) itemView.findViewById(R.id.item_text);
             icon  = (ImageView) itemView.findViewById(R.id.im_item_icon);
             container = (View) itemView.findViewById(R.id.cont_item_root);
+            container.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId() == R.id.cont_item_root) {
+               itemClickCallBack.onItemClick(getAdapterPosition());
+            }
         }
     }
 }

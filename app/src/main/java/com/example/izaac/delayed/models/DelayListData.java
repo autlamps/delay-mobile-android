@@ -17,15 +17,46 @@ public class DelayListData {
     public static List<ListItem> getListData() {
         List<ListItem> data = new ArrayList<>();
 
+        int currentIconPos = 0;
 
         for(int x = 0; x < tripLocationInArray.size(); x++) {
             ListItem item = new ListItem();
 
-            item.setImageResId(icons[x]);
+            item.setImageResId(icons[currentIconPos]);
+
+            currentIconPos++;
+
+            if (currentIconPos > 2) {
+                currentIconPos = 0;
+            }
+
             item.setTitle(BaseTripDetails.get(tripLocationInArray.get(x)).getRoute_long_name());
             data.add(item);
         }
 
         return data;
     }
+    public static List<ListItem> getTotalDelayData() {
+        List<ListItem> data = new ArrayList<>();
+
+        int currentIconPos = 0;
+
+        for(int y = 0; y < BaseTripDetails.size(); y++) {
+            ListItem item = new ListItem();
+
+            item.setImageResId(icons[currentIconPos]);
+
+            currentIconPos++;
+
+            if (currentIconPos > 2) {
+                currentIconPos = 0;
+            }
+
+            item.setTitle(BaseTripDetails.get(y).getRoute_short_name() + " : " + BaseTripDetails.get(y).getRoute_long_name());
+            data.add(item);
+        }
+
+        return data;
+    }
+
 }

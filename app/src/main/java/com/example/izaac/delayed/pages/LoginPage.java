@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
 import com.example.izaac.delayed.models.AuthTokens;
+import com.example.izaac.delayed.models.DelayListData;
 import com.example.izaac.delayed.models.Login;
 import com.example.izaac.delayed.models.TokenResponse;
 
@@ -30,6 +31,7 @@ public class LoginPage extends AppCompatActivity {
     private EditText UserPassword;
     private String LoginEmail;
     private String LoginPassword;
+    public static Boolean DelayTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,7 @@ public class LoginPage extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(LoginPage.this, "Login Correct", Toast.LENGTH_SHORT).show();
                     token = response.body().getResult().getAuthToken();
+                    DelayTotal = true;
 
                    // AuthTokens authTokens = new AuthTokens(response.body().getResult().getAuthToken());
 

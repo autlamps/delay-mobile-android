@@ -5,7 +5,8 @@
     android:gravity="center_vertical|left"
     android:orientation="horizontal"
     android:paddingLeft="16dp"
-    android:id="@+id/cont_item_root">
+    android:id="@+id/cont_item_root"
+    android:clickable="true">
 
 
     <ImageView

@@ -15,6 +15,7 @@ import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.NextStopDetails;
 import com.example.izaac.delayed.models.RouteDetails;
 import com.example.izaac.delayed.models.Trip;
+import static com.example.izaac.delayed.pages.LoginPage.DelayTotal;
 import com.example.izaac.delayed.models.TripDetails;
 
 import java.io.IOException;
@@ -36,11 +37,18 @@ public class homePage extends AppCompatActivity {
     private EditText Trip;
     private EditText AmountOfTrips;
     private Button NextButton;
+    private Button DelayButton;
+    private Boolean DelaysActive;
     RouteDetails routeDetails = new RouteDetails();
+    /*Next Stop Details ArrayList*/
     public static ArrayList<NextStopDetails> NSDetails = new ArrayList<NextStopDetails>();
+    /*Base Trip Details Arraylist*/
     public static ArrayList<Trip> BaseTripDetails = new ArrayList<Trip>();
+    /*Trip Location In Array Arraylist, used for storing the selected trip objects in a smaller list*/
     public static ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
+    /*Stores the users selected trip, stored as a string*/
     public static String selectedTrip;
+    /*Total number of services active*/
     private int numberOfServices;
 
 
@@ -51,6 +59,8 @@ public class homePage extends AppCompatActivity {
 
         System.out.println("jello");
 
+        DelayTotal = false;
+
         Trip = (EditText) findViewById(R.id.trip1text);
         AmountOfTrips = (EditText) findViewById(R.id.tripAmount);
 
@@ -58,14 +68,23 @@ public class homePage extends AppCompatActivity {
 
         NextButton = (Button) findViewById(R.id.nextButton);
 
+        DelayButton = (Button) findViewById(R.id.delayListButton);
+
         NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DelaysActive = false;
                 selectTrip();
             }
         });
 
-
+        DelayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DelaysActive = true;
+                selectTrip();
+            }
+        });
     }
 
     public void selectTrip() {
@@ -142,7 +161,14 @@ public class homePage extends AppCompatActivity {
 
                     System.out.println("h");
 
-                    if(tripLocationInArray.size() == 1) {
+                    if(DelaysActive == true) {
+                        Intent intent = new Intent(homePage.this, DelayListActivity.class);
+                        startActivity(intent);
+                        finish();
+                        DelayTotal = true;
+
+                    }
+                    else if(tripLocationInArray.size() == 1) {
                         Intent intent = new Intent(homePage.this, TripPage.class);
                         startActivity(intent);
                         finish();

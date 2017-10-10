@@ -24,7 +24,8 @@
         <activity android:name=".pages.TripPage" />
         <activity android:name=".pages.MultiTripPage" />
         <activity android:name=".pages.TripRecyclerView" />
-        <activity android:name=".pages.DelayListActivity"></activity>
+        <activity android:name=".pages.DelayListActivity" />
+        <activity android:name=".pages.ListDelayDetails"></activity>
     </application>
 
 </manifest>
