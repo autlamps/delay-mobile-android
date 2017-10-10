@@ -1,6 +1,8 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -69,6 +71,10 @@ public class homePage extends AppCompatActivity {
         NextButton = (Button) findViewById(R.id.nextButton);
 
         DelayButton = (Button) findViewById(R.id.delayListButton);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+
+        //Toast.makeText(homePage.this, sharedPreferences.getString("AUTH_TOKEN", "N/A"), Toast.LENGTH_SHORT).show();
 
         NextButton.setOnClickListener(new View.OnClickListener() {
             @Override

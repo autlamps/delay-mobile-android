@@ -1,11 +1,8 @@
 package com.example.izaac.delayed.pages;
 
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +13,6 @@ import android.widget.Toast;
 import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
 import com.example.izaac.delayed.models.CreateUser;
-import com.example.izaac.delayed.models.TokenRequest;
 import com.example.izaac.delayed.models.TokenResponse;
 
 import retrofit2.Call;
@@ -60,6 +56,8 @@ public class createAccount extends AppCompatActivity {
 
     }
 
+    /*this methood is used to register a user*/
+
     private void RegisterUser() {
 
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -84,9 +82,6 @@ public class createAccount extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(createAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
 
-
-                    // AuthTokens authTokens = new AuthTokens(response.body().getResult().getAuthToken());
-
                     Intent intent = new Intent(createAccount.this, LoginPage.class);
                     startActivity(intent);
                     finish();
@@ -105,56 +100,5 @@ public class createAccount extends AppCompatActivity {
         });
 
     }
-
-    private void createUser() {
-        String fName = NameText.getText().toString().trim();
-        String fEmail = EmailText.getText().toString().trim();
-        String fPassword = PasswordText.getText().toString().trim();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getString(R.string.api_url))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        service = retrofit.create(DelayApi.class);
-
-        NameText.setError(null);
-        EmailText.setError(null);
-        PasswordText.setError(null);
-
-        if(TextUtils.isEmpty(fName)) {
-            // Toast.makeText(this, "Please Enter your name.", Toast.LENGTH_SHORT).show();
-            NameText.setError("Please Enter your name");
-            return;
-
-        }
-        if(TextUtils.isEmpty(fEmail)) {
-            //Toast.makeText(this, "Please Enter Your Email.", Toast.LENGTH_SHORT).show();
-            EmailText.setError("Please Enter your Email");
-            return;
-        }
-        if(TextUtils.isEmpty(fPassword)){
-            //Toast.makeText(this, "Please Enter Your Password.", Toast.LENGTH_SHORT).show();
-            PasswordText.setError("Pleas Enter Your Password");
-            return;
-        }
-        else {
-
-            progressBar.setVisibility(View.VISIBLE);
-
-            TokenRequest tokenRequest = new TokenRequest();
-
-            tokenRequest.setName(NameText.getText().toString());
-            tokenRequest.setEmail(EmailText.getText().toString());
-            tokenRequest.setPassword(PasswordText.getText().toString());
-
-
-        }
-
-
-
-    }
-
-
 
 }

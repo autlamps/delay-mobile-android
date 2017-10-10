@@ -32,34 +32,48 @@ public class LoginPage extends AppCompatActivity {
     private String LoginEmail;
     private String LoginPassword;
     public static Boolean DelayTotal;
+    private static final String DEFAULT = "N/A";
+    private String AUTH_TOKEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        UserEmail = (EditText) findViewById(R.id.Email);
-        UserPassword = (EditText) findViewById(R.id.Password);
+        SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+        AUTH_TOKEN = sharedPreferences.getString("AUTH_TOKEN", DEFAULT);
 
-        Button LoginButton = (Button) findViewById(R.id.Login);
-        Button NewAccount = (Button) findViewById(R.id.NewAccount);
+        if(AUTH_TOKEN.equalsIgnoreCase(DEFAULT)) {
 
-        NewAccount.setOnClickListener(new View.OnClickListener() {
+            UserEmail = (EditText) findViewById(R.id.Email);
+            UserPassword = (EditText) findViewById(R.id.Password);
 
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginPage.this, createAccount.class);
-                startActivity(intent);
+            Button LoginButton = (Button) findViewById(R.id.Login);
+            Button NewAccount = (Button) findViewById(R.id.NewAccount);
 
+            NewAccount.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginPage.this, createAccount.class);
+                    startActivity(intent);
+
+                }
+            });
+
+            LoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    login();
+                }
+            });
         }
-        });
+        else {
+            Intent intent = new Intent(LoginPage.this, homePage.class);
+            startActivity(intent);
+        }
 
-        LoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                login();
-            }
-        });
+
 
 
     }
@@ -90,6 +104,11 @@ public class LoginPage extends AppCompatActivity {
                     Toast.makeText(LoginPage.this, "Login Correct", Toast.LENGTH_SHORT).show();
                     token = response.body().getResult().getAuthToken();
                     DelayTotal = true;
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("AUTH_TOKEN", token);
+                    editor.commit();
 
                    // AuthTokens authTokens = new AuthTokens(response.body().getResult().getAuthToken());
 
