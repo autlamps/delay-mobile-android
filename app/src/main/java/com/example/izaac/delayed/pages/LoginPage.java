@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,7 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        System.out.println("Hello");
 
         SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
         AUTH_TOKEN = sharedPreferences.getString("AUTH_TOKEN", DEFAULT);
@@ -47,6 +49,8 @@ public class LoginPage extends AppCompatActivity {
 
             UserEmail = (EditText) findViewById(R.id.Email);
             UserPassword = (EditText) findViewById(R.id.Password);
+
+            UserPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
             Button LoginButton = (Button) findViewById(R.id.Login);
             Button NewAccount = (Button) findViewById(R.id.NewAccount);
@@ -109,6 +113,7 @@ public class LoginPage extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("AUTH_TOKEN", token);
                     editor.commit();
+
 
                    // AuthTokens authTokens = new AuthTokens(response.body().getResult().getAuthToken());
 
