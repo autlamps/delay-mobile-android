@@ -1,5 +1,6 @@
 package com.example.izaac.delayed.interfaces;
 
+import com.example.izaac.delayed.models.CreateUser;
 import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.Login;
 import com.example.izaac.delayed.models.TokenRequest;
@@ -23,5 +24,7 @@ public interface DelayApi {
     @GET("delays")
     Call<DelayResponse> trip();
 
+    @POST("users")
+    Call<TokenResponse> createUser(@Body CreateUser createUser);
 
 }
