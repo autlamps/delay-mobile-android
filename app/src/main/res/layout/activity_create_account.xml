@@ -3,47 +3,48 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="495dp"
+    android:layout_height="530dp"
     tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp"
-    >
+    tools:layout_editor_absoluteY="8dp">
 
     <EditText
         android:id="@+id/Name"
-        android:hint="Name"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
         tools:text="Name"
-        android:layout_marginBottom="42dp"
-        android:layout_above="@+id/Email"
+        android:layout_marginTop="57dp"
+        android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/Email"
         android:layout_alignStart="@+id/Email" />
 
     <EditText
         android:id="@+id/Email"
-        android:hint="Email"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textPersonName"
         tools:text="Email"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/Name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
 
     <EditText
         android:id="@+id/Password"
-        android:hint="Password"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPersonName"
         tools:text="Password"
+        android:password="true"
         android:layout_below="@+id/Email"
         android:layout_alignLeft="@+id/Email"
         android:layout_alignStart="@+id/Email"
-        android:layout_marginTop="37dp" />
+        android:layout_marginTop="28dp" />
 
     <Button
         android:id="@+id/CreateAccountButton"
@@ -52,16 +53,23 @@
         android:onClick="onButtonClick"
         android:text="Create Account"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+    <EditText
+        android:id="@+id/RetypePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="68dp" />
+        android:layout_alignLeft="@+id/Password"
+        android:layout_alignStart="@+id/Password"
+        android:layout_below="@+id/Password"
+        android:password="true"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="RetypePassword"
+        android:layout_alignRight="@+id/Password"
+        android:layout_alignEnd="@+id/Password" />
 
 
 </RelativeLayout>

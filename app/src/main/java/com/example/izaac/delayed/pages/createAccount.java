@@ -28,29 +28,35 @@ public class createAccount extends AppCompatActivity {
     private EditText NameText;
     private EditText EmailText;
     private EditText PasswordText;
+    private EditText RePasswordText;
     private String Name;
     private String Email;
     private String Password;
+    private String RePassword;
+    private Boolean PasswordMatch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
-
+        System.out.println("stop here");
 
         NameText = (EditText) findViewById(R.id.Name);
         EmailText = (EditText) findViewById(R.id.Email);
         PasswordText = (EditText) findViewById(R.id.Password);
+        RePasswordText = (EditText) findViewById(R.id.RetypePassword);
 
         Button CreateAccount = (Button) findViewById(R.id.CreateAccountButton);
 
         CreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RegisterUser();
+                VerifyUserCredentials();
+                if(PasswordMatch == true) {
+                    RegisterUser();
+                }
+
             }
         });
 
@@ -98,6 +104,32 @@ public class createAccount extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    /*This method checks the users credentials and then returns a boolean value based off if the retyped password correct. */
+
+    private void VerifyUserCredentials() {
+
+        Name = NameText.getText().toString().trim();
+        Email = EmailText.getText().toString().trim();
+        Password = PasswordText.getText().toString().trim();
+        RePassword = RePasswordText.getText().toString().trim();
+
+        if(Name.equalsIgnoreCase("")) {
+            Toast.makeText(createAccount.this, "Name is Empty", Toast.LENGTH_SHORT).show();
+        }
+        if(Email.equalsIgnoreCase("")) {
+            Toast.makeText(createAccount.this, "Email is Empty", Toast.LENGTH_SHORT).show();
+        }
+        if(Password.equalsIgnoreCase("")) {
+            Toast.makeText(createAccount.this, "Password is Empty", Toast.LENGTH_SHORT).show();
+        }
+        if(Password != null) {
+            if(Password.equalsIgnoreCase(RePassword)) {
+                PasswordMatch = true;
+            }
+        }
 
     }
 
