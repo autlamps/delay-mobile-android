@@ -1,7 +1,10 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ public class TripPage extends AppCompatActivity {
     EditText Trip_delay;
     EditText Trip_next_stop;
     EditText Trip_eta;
+    Button BackButton;
     //TripDetails tripDetails = new TripDetails();
     RouteDetails routeDetails = new RouteDetails();
     Trip trip = new Trip();
@@ -63,6 +67,7 @@ public class TripPage extends AppCompatActivity {
         Trip_long_name = (EditText) findViewById(R.id.trip_long_name);
         Trip_long_name.setText(BaseTripDetails.get(tripLocationInArray.get(recyclerViewUserSelection)).getRoute_long_name(), TextView.BufferType.EDITABLE);
 
+        BackButton = (Button) findViewById(R.id.BackButton);
 
         /*Setting the Delays in Text*/
 
@@ -101,6 +106,15 @@ public class TripPage extends AppCompatActivity {
         Trip_eta.setText(trip_eta_text, TextView.BufferType.EDITABLE);
         Trip_eta.setEnabled(false);
 
+        /*Button on click listener*/
+
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TripPage.this, homePage.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /*converting the delay from seconds to minutes*/
