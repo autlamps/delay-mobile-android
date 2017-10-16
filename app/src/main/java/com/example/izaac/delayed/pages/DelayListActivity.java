@@ -33,6 +33,8 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delay_list);
 
+        System.out.println("STOP HERE FOR DEBUG");
+
         if(DelayTotal == true) {
             listData = (ArrayList) DelayListData.getTotalDelayData();
         }

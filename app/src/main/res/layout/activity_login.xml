@@ -66,6 +66,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="63dp" />
 
+    <Button
+        android:id="@+id/LoginLaterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/NewAccount"
+        android:layout_alignLeft="@+id/NewAccount"
+        android:layout_alignRight="@+id/NewAccount"
+        android:layout_alignStart="@+id/NewAccount"
+        android:layout_below="@+id/NewAccount"
+        android:layout_marginTop="16dp"
+        android:text="Log In Later" />
+
 
 </RelativeLayout>
 

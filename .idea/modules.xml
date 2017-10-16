@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Delayed.iml" filepath="$PROJECT_DIR$/Delayed.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/delay-mobile-android-ic-initial.iml" filepath="$PROJECT_DIR$/delay-mobile-android-ic-initial.iml" />
     </modules>
   </component>
 </project>

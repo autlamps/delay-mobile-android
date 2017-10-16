@@ -80,4 +80,13 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trip_eta"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp"
+        android:text="Back" />
+
 </RelativeLayout>

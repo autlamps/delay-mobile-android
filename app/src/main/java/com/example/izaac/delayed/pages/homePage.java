@@ -40,6 +40,7 @@ public class homePage extends AppCompatActivity {
     private EditText AmountOfTrips;
     private Button NextButton;
     private Button DelayButton;
+    private Button LogOutButton;
     private Boolean DelaysActive;
     RouteDetails routeDetails = new RouteDetails();
     /*Next Stop Details ArrayList*/
@@ -52,7 +53,6 @@ public class homePage extends AppCompatActivity {
     public static String selectedTrip;
     /*Total number of services active*/
     private int numberOfServices;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,7 @@ public class homePage extends AppCompatActivity {
 
         DelayButton = (Button) findViewById(R.id.delayListButton);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
-
+        LogOutButton = (Button) findViewById(R.id.LogoutButton);
         //Toast.makeText(homePage.this, sharedPreferences.getString("AUTH_TOKEN", "N/A"), Toast.LENGTH_SHORT).show();
 
         NextButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +90,19 @@ public class homePage extends AppCompatActivity {
                 selectTrip();
             }
         });
+
+        LogOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                sharedPreferences.edit().clear().commit();
+
+                Intent intent = new Intent(homePage.this, LoginPage.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
     }
 
     public void selectTrip() {
@@ -102,8 +114,8 @@ public class homePage extends AppCompatActivity {
             public okhttp3.Response intercept(Chain chain) throws IOException {
 
                 Request request = chain.request();
-
-                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", token);
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", sharedPreferences.getString("AUTH_TOKEN", "N/A"));
 
                 return chain.proceed(newRequest.build());
             }
@@ -119,9 +131,6 @@ public class homePage extends AppCompatActivity {
         DelayApi delayApi = retrofit.create(DelayApi.class);
 
         selectedTrip = Trip.getText().toString().trim();
-
-        //tripDetails.setTrip(Trip.getText().toString().trim());
-        //routeDetails.setTrip(Trip.getText().toString().trim());
 
         Call<DelayResponse> call = delayApi.trip();
 
@@ -156,10 +165,11 @@ public class homePage extends AppCompatActivity {
                         nextStopDetails.setScheduled_arrival(response.body().getResult().getTrips().get(i).getNextStop().getScheduledArrival());
                         NSDetails.add(nextStopDetails);
 
-                        if(BaseTripDetails.get(i).getRoute_short_name().equalsIgnoreCase(selectedTrip))
+                        if(BaseTripDetails.get(i).getRoute_short_name().equalsIgnoreCase(selectedTrip) || BaseTripDetails.get(i).getRoute_long_name().equalsIgnoreCase(selectedTrip))
                         {
                             tripLocationInArray.add(i);
                         }
+
 
                     }
 
@@ -170,7 +180,7 @@ public class homePage extends AppCompatActivity {
                     if(DelaysActive == true) {
                         Intent intent = new Intent(homePage.this, DelayListActivity.class);
                         startActivity(intent);
-                        finish();
+                        //finish();
                         DelayTotal = true;
 
                     }
