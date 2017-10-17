@@ -15,10 +15,15 @@ import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
 import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.NextStopDetails;
+import com.example.izaac.delayed.models.NotificationDetails;
+import com.example.izaac.delayed.models.NotificationResponse;
+import com.example.izaac.delayed.models.NotificationToken;
 import com.example.izaac.delayed.models.RouteDetails;
+import com.example.izaac.delayed.models.TokenResponse;
 import com.example.izaac.delayed.models.Trip;
 import static com.example.izaac.delayed.pages.LoginPage.DelayTotal;
 import com.example.izaac.delayed.models.TripDetails;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,6 +65,7 @@ public class homePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         System.out.println("jello");
+        PostNotificationToken();
 
         DelayTotal = false;
 
@@ -207,6 +213,70 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    private void PostNotificationToken() {
+
+        OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
+
+        okhttpBuilder.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request request = chain.request();
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", sharedPreferences.getString("AUTH_TOKEN", "N/A"));
+
+                return chain.proceed(newRequest.build());
+            }
+        });
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://dev.delayed.nz")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okhttpBuilder.build())
+                .build();
+
+
+        DelayApi delayApi = retrofit.create(DelayApi.class);
+
+        NotificationToken notificationToken = new NotificationToken("p", "bob phone", FirebaseInstanceId.getInstance().getToken());
+
+        Call<NotificationResponse> call = delayApi.notificationToken(notificationToken);
+
+        call.enqueue(new Callback<NotificationResponse>() {
+            @Override
+            public void onResponse(Call<NotificationResponse> call, Response<NotificationResponse> response) {
+
+                System.out.println("Hello");
+                if (response.isSuccessful()) {
+                    NotificationDetails notificationDetails = new NotificationDetails();
+                    notificationDetails.setId(response.body().getResult().getId());
+                    notificationDetails.setUser_id(response.body().getResult().getUserId());
+                    notificationDetails.setType(response.body().getResult().getType());
+                    notificationDetails.setName(response.body().getResult().getName());
+                    notificationDetails.setValue(response.body().getResult().getValue());
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("Notification Tokens", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("NOTIFICATION_TOKEN", FirebaseInstanceId.getInstance().getToken());
+                    editor.commit();
+
+                }
+                else {
+                    Toast.makeText(homePage.this, "Notification Token Failed", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<NotificationResponse> call, Throwable t) {
+                Toast.makeText(homePage.this, "Notification Token Error......", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 

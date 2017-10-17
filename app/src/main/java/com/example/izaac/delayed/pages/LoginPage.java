@@ -17,7 +17,9 @@ import com.example.izaac.delayed.models.AuthTokens;
 import com.example.izaac.delayed.models.CreateUser;
 import com.example.izaac.delayed.models.DelayListData;
 import com.example.izaac.delayed.models.Login;
+import com.example.izaac.delayed.models.NotificationToken;
 import com.example.izaac.delayed.models.TokenResponse;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +40,7 @@ public class LoginPage extends AppCompatActivity {
     private Boolean annon;
     private static final String DEFAULT = "N/A";
     private String AUTH_TOKEN;
+    //private String NOTIFICATION_TOKEN;
     private Button LoginLaterButton;
 
 
@@ -46,6 +49,7 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         System.out.println("Hello");
+        System.out.println("LoginPage.onCreate: " + FirebaseInstanceId.getInstance().getToken());
 
         SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
         AUTH_TOKEN = sharedPreferences.getString("AUTH_TOKEN", DEFAULT);
@@ -74,6 +78,7 @@ public class LoginPage extends AppCompatActivity {
             LoginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                   // PostNotificationToken();
                     login();
                 }
             });
@@ -82,6 +87,7 @@ public class LoginPage extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                    // annon = true;
+                   // PostNotificationToken();
                     annonUser();
                 }
             });

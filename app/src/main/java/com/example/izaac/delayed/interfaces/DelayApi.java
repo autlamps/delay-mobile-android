@@ -3,9 +3,9 @@ package com.example.izaac.delayed.interfaces;
 import com.example.izaac.delayed.models.CreateUser;
 import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.Login;
-import com.example.izaac.delayed.models.TokenRequest;
+import com.example.izaac.delayed.models.NotificationResponse;
+import com.example.izaac.delayed.models.NotificationToken;
 import com.example.izaac.delayed.models.TokenResponse;
-import com.example.izaac.delayed.models.Trip;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,5 +26,8 @@ public interface DelayApi {
 
     @POST("users")
     Call<TokenResponse> createUser(@Body CreateUser createUser);
+
+    @POST("notifications")
+    Call<NotificationResponse> notificationToken(@Body NotificationToken notificationToken);
 
 }
