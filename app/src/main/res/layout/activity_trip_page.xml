@@ -84,9 +84,21 @@
         android:id="@+id/BackButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/trip_eta"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp"
-        android:text="Back" />
+        android:text="Back"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/SubscribeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/BackButton"
+        android:layout_alignEnd="@+id/BackButton"
+        android:layout_alignLeft="@+id/BackButton"
+        android:layout_alignRight="@+id/BackButton"
+        android:layout_alignStart="@+id/BackButton"
+        android:layout_marginBottom="18dp"
+        android:text="Subscribe" />
 
 </RelativeLayout>

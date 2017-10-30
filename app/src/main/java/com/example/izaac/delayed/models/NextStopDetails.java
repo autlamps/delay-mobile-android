@@ -5,6 +5,8 @@ package com.example.izaac.delayed.models;
  */
 
 public class NextStopDetails {
+
+    private String stoptime_id;
     private String id;
     private String name;
     private double lat;
@@ -13,6 +15,13 @@ public class NextStopDetails {
     private String scheduled_arrival;
     private String eta;
 
+    public String getStoptime_id() {
+        return stoptime_id;
+    }
+
+    public void setStoptime_id(String stoptime_id) {
+        this.stoptime_id = stoptime_id;
+    }
 
     public String getId() {
         return id;

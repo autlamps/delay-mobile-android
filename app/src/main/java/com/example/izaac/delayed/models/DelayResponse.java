@@ -8,50 +8,50 @@ import java.util.List;
 
 public class DelayResponse {
 
-    @SerializedName("success")
-    @Expose
-    private Boolean success;
-    @SerializedName("errors")
-    @Expose
-    private Object errors;
-    @SerializedName("result")
-    @Expose
-    private Result result;
-    @SerializedName("meta")
-    @Expose
-    private Meta meta;
+        @SerializedName("success")
+        @Expose
+        private Boolean success;
+        @SerializedName("errors")
+        @Expose
+        private Object errors;
+        @SerializedName("result")
+        @Expose
+        private Result result;
+        @SerializedName("meta")
+        @Expose
+        private Meta meta;
 
-    public Boolean getSuccess() {
-        return success;
-    }
+        public Boolean getSuccess() {
+            return success;
+        }
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+        public void setSuccess(Boolean success) {
+            this.success = success;
+        }
 
-    public Object getErrors() {
-        return errors;
-    }
+        public Object getErrors() {
+            return errors;
+        }
 
-    public void setErrors(Object errors) {
-        this.errors = errors;
-    }
+        public void setErrors(Object errors) {
+            this.errors = errors;
+        }
 
-    public Result getResult() {
-        return result;
-    }
+        public Result getResult() {
+            return result;
+        }
 
-    public void setResult(Result result) {
-        this.result = result;
-    }
+        public void setResult(Result result) {
+            this.result = result;
+        }
 
-    public Meta getMeta() {
-        return meta;
-    }
+        public Meta getMeta() {
+            return meta;
+        }
 
-    public void setMeta(Meta meta) {
-        this.meta = meta;
-    }
+        public void setMeta(Meta meta) {
+            this.meta = meta;
+        }
 
     public class Meta {
 
@@ -80,6 +80,98 @@ public class DelayResponse {
 
     }
 
+    public class NextStop {
+
+        @SerializedName("stoptime_id")
+        @Expose
+        private String stoptimeId;
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("name")
+        @Expose
+        private String name;
+        @SerializedName("lat")
+        @Expose
+        private Double lat;
+        @SerializedName("lon")
+        @Expose
+        private Double lon;
+        @SerializedName("delay")
+        @Expose
+        private Integer delay;
+        @SerializedName("scheduled_arrival")
+        @Expose
+        private String scheduledArrival;
+        @SerializedName("eta")
+        @Expose
+        private String eta;
+
+        public String getStoptimeId() {
+            return stoptimeId;
+        }
+
+        public void setStoptimeId(String stoptimeId) {
+            this.stoptimeId = stoptimeId;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Double getLat() {
+            return lat;
+        }
+
+        public void setLat(Double lat) {
+            this.lat = lat;
+        }
+
+        public Double getLon() {
+            return lon;
+        }
+
+        public void setLon(Double lon) {
+            this.lon = lon;
+        }
+
+        public Integer getDelay() {
+            return delay;
+        }
+
+        public void setDelay(Integer delay) {
+            this.delay = delay;
+        }
+
+        public String getScheduledArrival() {
+            return scheduledArrival;
+        }
+
+        public void setScheduledArrival(String scheduledArrival) {
+            this.scheduledArrival = scheduledArrival;
+        }
+
+        public String getEta() {
+            return eta;
+        }
+
+        public void setEta(String eta) {
+            this.eta = eta;
+        }
+
+    }
 
     public class Result {
 
@@ -88,7 +180,7 @@ public class DelayResponse {
         private Integer count;
         @SerializedName("trips")
         @Expose
-        private List<Trip> trips = null;
+        private List<Trip> trips;
         @SerializedName("exec_name")
         @Expose
         private String execName;
@@ -139,180 +231,110 @@ public class DelayResponse {
             this.validUntil = validUntil;
         }
 
-        public class NextStop {
+    }
 
-            @SerializedName("id")
-            @Expose
-            private String id;
-            @SerializedName("name")
-            @Expose
-            private String name;
-            @SerializedName("lat")
-            @Expose
-            private Double lat;
-            @SerializedName("lon")
-            @Expose
-            private Double lon;
-            @SerializedName("delay")
-            @Expose
-            private Integer delay;
-            @SerializedName("scheduled_arrival")
-            @Expose
-            private String scheduledArrival;
-            @SerializedName("eta")
-            @Expose
-            private String eta;
+    public class Trip {
 
-            public String getId() {
-                return id;
-            }
+        @SerializedName("trip_id")
+        @Expose
+        private String tripId;
+        @SerializedName("route_id")
+        @Expose
+        private String routeId;
+        @SerializedName("route_long_name")
+        @Expose
+        private String routeLongName;
+        @SerializedName("route_short_name")
+        @Expose
+        private String routeShortName;
+        @SerializedName("next_stop")
+        @Expose
+        private NextStop nextStop;
+        @SerializedName("vehicle_id")
+        @Expose
+        private String vehicleId;
+        @SerializedName("vehicle_type")
+        @Expose
+        private Integer vehicleType;
+        @SerializedName("lat")
+        @Expose
+        private Double lat;
+        @SerializedName("lon")
+        @Expose
+        private Double lon;
 
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public Double getLat() {
-                return lat;
-            }
-
-            public void setLat(Double lat) {
-                this.lat = lat;
-            }
-
-            public Double getLon() {
-                return lon;
-            }
-
-            public void setLon(Double lon) {
-                this.lon = lon;
-            }
-
-            public Integer getDelay() {
-                return delay;
-            }
-
-            public void setDelay(Integer delay) {
-                this.delay = delay;
-            }
-
-            public String getScheduledArrival() {
-                return scheduledArrival;
-            }
-
-            public void setScheduledArrival(String scheduledArrival) {
-                this.scheduledArrival = scheduledArrival;
-            }
-
-            public String getEta() {
-                return eta;
-            }
-
-            public void setEta(String eta) {
-                this.eta = eta;
-            }
-
+        public String getTripId() {
+            return tripId;
         }
 
-        public class Trip {
-
-            @SerializedName("trip_id")
-            @Expose
-            private String tripId;
-            @SerializedName("route_id")
-            @Expose
-            private String routeId;
-            @SerializedName("route_long_name")
-            @Expose
-            private String routeLongName;
-            @SerializedName("route_short_name")
-            @Expose
-            private String routeShortName;
-            @SerializedName("next_stop")
-            @Expose
-            private NextStop nextStop;
-            @SerializedName("vehicle_id")
-            @Expose
-            private String vehicleId;
-            @SerializedName("lat")
-            @Expose
-            private Double lat;
-            @SerializedName("lon")
-            @Expose
-            private Double lon;
-
-            public String getTripId() {
-                return tripId;
-            }
-
-            public void setTripId(String tripId) {
-                this.tripId = tripId;
-            }
-
-            public String getRouteId() {
-                return routeId;
-            }
-
-            public void setRouteId(String routeId) {
-                this.routeId = routeId;
-            }
-
-            public String getRouteLongName() {
-                return routeLongName;
-            }
-
-            public void setRouteLongName(String routeLongName) {
-                this.routeLongName = routeLongName;
-            }
-
-            public String getRouteShortName() {
-                return routeShortName;
-            }
-
-            public void setRouteShortName(String routeShortName) {
-                this.routeShortName = routeShortName;
-            }
-
-            public NextStop getNextStop() {
-                return nextStop;
-            }
-
-            public void setNextStop(NextStop nextStop) {
-                this.nextStop = nextStop;
-            }
-
-            public String getVehicleId() {
-                return vehicleId;
-            }
-
-            public void setVehicleId(String vehicleId) {
-                this.vehicleId = vehicleId;
-            }
-
-            public Double getLat() {
-                return lat;
-            }
-
-            public void setLat(Double lat) {
-                this.lat = lat;
-            }
-
-            public Double getLon() {
-                return lon;
-            }
-
-            public void setLon(Double lon) {
-                this.lon = lon;
-            }
-
+        public void setTripId(String tripId) {
+            this.tripId = tripId;
         }
+
+        public String getRouteId() {
+            return routeId;
+        }
+
+        public void setRouteId(String routeId) {
+            this.routeId = routeId;
+        }
+
+        public String getRouteLongName() {
+            return routeLongName;
+        }
+
+        public void setRouteLongName(String routeLongName) {
+            this.routeLongName = routeLongName;
+        }
+
+        public String getRouteShortName() {
+            return routeShortName;
+        }
+
+        public void setRouteShortName(String routeShortName) {
+            this.routeShortName = routeShortName;
+        }
+
+        public NextStop getNextStop() {
+            return nextStop;
+        }
+
+        public void setNextStop(NextStop nextStop) {
+            this.nextStop = nextStop;
+        }
+
+        public String getVehicleId() {
+            return vehicleId;
+        }
+
+        public void setVehicleId(String vehicleId) {
+            this.vehicleId = vehicleId;
+        }
+
+        public Integer getVehicleType() {
+            return vehicleType;
+        }
+
+        public void setVehicleType(Integer vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        public Double getLat() {
+            return lat;
+        }
+
+        public void setLat(Double lat) {
+            this.lat = lat;
+        }
+
+        public Double getLon() {
+            return lon;
+        }
+
+        public void setLon(Double lon) {
+            this.lon = lon;
+        }
+
     }
 }
 

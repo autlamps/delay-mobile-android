@@ -1,11 +1,14 @@
 package com.example.izaac.delayed.interfaces;
 
+import com.example.izaac.delayed.models.CreateSubscription;
 import com.example.izaac.delayed.models.CreateUser;
 import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.Login;
 import com.example.izaac.delayed.models.NotificationResponse;
 import com.example.izaac.delayed.models.NotificationToken;
+import com.example.izaac.delayed.models.SubscriptionsResponse;
 import com.example.izaac.delayed.models.TokenResponse;
+import com.example.izaac.delayed.models.TotalSubscriptionsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,5 +32,11 @@ public interface DelayApi {
 
     @POST("notifications")
     Call<NotificationResponse> notificationToken(@Body NotificationToken notificationToken);
+
+    @POST("subscriptions")
+    Call<SubscriptionsResponse> createSubscription(@Body CreateSubscription createSubscription);
+
+    @GET("subscriptions")
+    Call<TotalSubscriptionsResponse> subscription();
 
 }

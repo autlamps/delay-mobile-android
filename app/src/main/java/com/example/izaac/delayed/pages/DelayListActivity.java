@@ -37,6 +37,7 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
 
         if(DelayTotal == true) {
             listData = (ArrayList) DelayListData.getTotalDelayData();
+
         }
         else if(DelayTotal == false) {
             listData = (ArrayList) DelayListData.getListData();

@@ -166,6 +166,7 @@ public class homePage extends AppCompatActivity {
                         nextStopDetails.setDelay(response.body().getResult().getTrips().get(i).getNextStop().getDelay());
                         nextStopDetails.setEta(response.body().getResult().getTrips().get(i).getNextStop().getEta());
                         nextStopDetails.setId(response.body().getResult().getTrips().get(i).getNextStop().getId());
+                        nextStopDetails.setStoptime_id(response.body().getResult().getTrips().get(i).getNextStop().getStoptimeId());
                         nextStopDetails.setLat(response.body().getResult().getTrips().get(i).getNextStop().getLat());
                         nextStopDetails.setLon(response.body().getResult().getTrips().get(i).getNextStop().getLon());
                         nextStopDetails.setScheduled_arrival(response.body().getResult().getTrips().get(i).getNextStop().getScheduledArrival());
@@ -179,9 +180,13 @@ public class homePage extends AppCompatActivity {
 
                     }
 
-                  //  checkNumberOfServices();
+                  //checkNumberOfServices();
 
                     System.out.println("h");
+
+//                    if(BaseTripDetails.size() == 0) {
+//                        Toast.makeText(homePage.this, "No Trips Delayed At This Time", Toast.LENGTH_SHORT).show();
+//                    }
 
                     if(DelaysActive == true) {
                         Intent intent = new Intent(homePage.this, DelayListActivity.class);
@@ -190,15 +195,17 @@ public class homePage extends AppCompatActivity {
                         DelayTotal = true;
 
                     }
+
+                    //problem occuring!!!!!!!
                     else if(tripLocationInArray.size() == 1) {
                         Intent intent = new Intent(homePage.this, TripPage.class);
                         startActivity(intent);
-                        finish();
+                       // finish();
                     }
                     else if(tripLocationInArray.size() > 1) {
                         Intent intent = new Intent(homePage.this, DelayListActivity.class);
                         startActivity(intent);
-                        finish();
+                       // finish();
                     }
                 }
                 else {
@@ -237,7 +244,7 @@ public class homePage extends AppCompatActivity {
                 .baseUrl("https://dev.delayed.nz")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okhttpBuilder.build())
-                .build();
+                .build();   
 
 
         DelayApi delayApi = retrofit.create(DelayApi.class);
