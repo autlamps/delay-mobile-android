@@ -17,6 +17,7 @@
         android:layout_height="60dp"
         android:layout_below="@+id/rec_list"
         android:layout_marginTop="42dp"
+        android:background="@android:color/holo_blue_dark"
         android:text="Search Trips" />
 
 

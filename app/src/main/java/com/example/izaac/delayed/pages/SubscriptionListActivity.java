@@ -1,6 +1,8 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +26,7 @@ public class SubscriptionListActivity extends AppCompatActivity implements Delay
     private RecyclerView recyclerView;
     private Button searchButton;
     private Button delayButton;
+    private Button LogoutButton;
     private DelayAdapter delayAdapter;
     private ArrayList listData;
     public static int recyclerViewUserSelection;
@@ -44,6 +47,7 @@ public class SubscriptionListActivity extends AppCompatActivity implements Delay
 
         searchButton = (Button) findViewById(R.id.searchButton);
         delayButton = (Button) findViewById(R.id.Delays);
+        LogoutButton = (Button) findViewById(R.id.LogoutButton);
         recyclerView = (RecyclerView) findViewById(R.id.rec_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -67,6 +71,18 @@ public class SubscriptionListActivity extends AppCompatActivity implements Delay
                 DelayTotal = false;
                 Intent intent = new Intent(SubscriptionListActivity.this, DelayListActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        LogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                sharedPreferences.edit().clear().commit();
+
+                Intent intent = new Intent(SubscriptionListActivity.this, LoginPage.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

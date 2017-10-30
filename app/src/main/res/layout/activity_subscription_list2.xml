@@ -13,23 +13,33 @@
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="210dp"
-        android:layout_height="60dp"
+        android:layout_width="205dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@android:color/holo_blue_dark"
-        android:text="Search Trips" />
+        android:text="Home" />
 
     <Button
         android:id="@+id/Delays"
-        android:layout_width="match_parent"
+        android:layout_width="210dp"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/searchButton"
         android:layout_toEndOf="@+id/searchButton"
         android:layout_toRightOf="@+id/searchButton"
         android:background="@android:color/holo_blue_dark"
         android:text="Delays" />
+
+    <Button
+        android:id="@+id/LogoutButton"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rec_list"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Logout" />
 
 
 </RelativeLayout>
