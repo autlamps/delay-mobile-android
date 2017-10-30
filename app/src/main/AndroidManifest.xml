@@ -37,7 +37,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".pages.Subscriptions"></activity>
+        <activity android:name=".pages.Subscriptions" />
+        <activity android:name=".pages.SubscriptionListActivity"></activity>
     </application>
 
 </manifest>

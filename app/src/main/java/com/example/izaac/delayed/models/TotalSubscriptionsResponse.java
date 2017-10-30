@@ -14,12 +14,12 @@ public class TotalSubscriptionsResponse {
         @SerializedName("success")
         @Expose
         private Boolean success;
-        @SerializedName("result")
-        @Expose
-        private Result result;
         @SerializedName("errors")
         @Expose
         private Object errors;
+        @SerializedName("result")
+        @Expose
+        private List<Result> result = null;
         @SerializedName("meta")
         @Expose
         private Meta meta;
@@ -32,20 +32,20 @@ public class TotalSubscriptionsResponse {
             this.success = success;
         }
 
-        public Result getResult() {
-            return result;
-        }
-
-        public void setResult(Result result) {
-            this.result = result;
-        }
-
         public Object getErrors() {
             return errors;
         }
 
         public void setErrors(Object errors) {
             this.errors = errors;
+        }
+
+        public List<Result> getResult() {
+            return result;
+        }
+
+        public void setResult(List<Result> result) {
+            this.result = result;
         }
 
         public Meta getMeta() {
@@ -55,8 +55,6 @@ public class TotalSubscriptionsResponse {
         public void setMeta(Meta meta) {
             this.meta = meta;
         }
-
-
 
 
     public class Meta {
@@ -86,128 +84,50 @@ public class TotalSubscriptionsResponse {
 
     }
 
-
     public class Result {
-
-        @SerializedName("count")
-        @Expose
-        private Integer count;
-        @SerializedName("subscriptions")
-        @Expose
-        private List<Subscription> subscriptions;
-
-        public Integer getCount() {
-            return count;
-        }
-
-        public void setCount(Integer count) {
-            this.count = count;
-        }
-
-        public List<Subscription> getSubscriptions() {
-            return subscriptions;
-        }
-
-        public void setSubscriptions(List<Subscription> subscriptions) {
-            this.subscriptions = subscriptions;
-        }
-
-    }
-
-    public class StopTime {
-
-        @SerializedName("stop_time_id")
-        @Expose
-        private String stopTimeId;
-        @SerializedName("stop_id")
-        @Expose
-        private String stopId;
-        @SerializedName("stop_name")
-        @Expose
-        private String stopName;
-        @SerializedName("stop_code")
-        @Expose
-        private String stopCode;
-        @SerializedName("arrival_time")
-        @Expose
-        private String arrivalTime;
-        @SerializedName("departure_time")
-        @Expose
-        private String departureTime;
-
-        public String getStopTimeId() {
-            return stopTimeId;
-        }
-
-        public void setStopTimeId(String stopTimeId) {
-            this.stopTimeId = stopTimeId;
-        }
-
-        public String getStopId() {
-            return stopId;
-        }
-
-        public void setStopId(String stopId) {
-            this.stopId = stopId;
-        }
-
-        public String getStopName() {
-            return stopName;
-        }
-
-        public void setStopName(String stopName) {
-            this.stopName = stopName;
-        }
-
-        public String getStopCode() {
-            return stopCode;
-        }
-
-        public void setStopCode(String stopCode) {
-            this.stopCode = stopCode;
-        }
-
-        public String getArrivalTime() {
-            return arrivalTime;
-        }
-
-        public void setArrivalTime(String arrivalTime) {
-            this.arrivalTime = arrivalTime;
-        }
-
-        public String getDepartureTime() {
-            return departureTime;
-        }
-
-        public void setDepartureTime(String departureTime) {
-            this.departureTime = departureTime;
-        }
-
-    }
-
-    public class Subscription {
 
         @SerializedName("id")
         @Expose
         private String id;
-        @SerializedName("route_id")
-        @Expose
-        private String routeId;
         @SerializedName("trip_id")
         @Expose
         private String tripId;
-        @SerializedName("stop_time")
+        @SerializedName("user_id")
         @Expose
-        private StopTime stopTime;
-        @SerializedName("days")
-        @Expose
-        private List<String> days = null;
-        @SerializedName("date_created")
-        @Expose
-        private String dateCreated;
+        private String userId;
         @SerializedName("archived")
         @Expose
         private Boolean archived;
+        @SerializedName("monday")
+        @Expose
+        private Boolean monday;
+        @SerializedName("tuesday")
+        @Expose
+        private Boolean tuesday;
+        @SerializedName("wednesday")
+        @Expose
+        private Boolean wednesday;
+        @SerializedName("thursday")
+        @Expose
+        private Boolean thursday;
+        @SerializedName("friday")
+        @Expose
+        private Boolean friday;
+        @SerializedName("saturday")
+        @Expose
+        private Boolean saturday;
+        @SerializedName("sunday")
+        @Expose
+        private Boolean sunday;
+        @SerializedName("notification_ids")
+        @Expose
+        private List<String> notificationIds;
+        @SerializedName("stop_time")
+        @Expose
+        private StopTime stopTime;
+        @SerializedName("created")
+        @Expose
+        private Integer created;
 
         public String getId() {
             return id;
@@ -215,14 +135,6 @@ public class TotalSubscriptionsResponse {
 
         public void setId(String id) {
             this.id = id;
-        }
-
-        public String getRouteId() {
-            return routeId;
-        }
-
-        public void setRouteId(String routeId) {
-            this.routeId = routeId;
         }
 
         public String getTripId() {
@@ -233,28 +145,12 @@ public class TotalSubscriptionsResponse {
             this.tripId = tripId;
         }
 
-        public StopTime getStopTime() {
-            return stopTime;
+        public String getUserId() {
+            return userId;
         }
 
-        public void setStopTime(StopTime stopTime) {
-            this.stopTime = stopTime;
-        }
-
-        public List<String> getDays(int i) {
-            return days;
-        }
-
-        public void setDays(List<String> days) {
-            this.days = days;
-        }
-
-        public String getDateCreated() {
-            return dateCreated;
-        }
-
-        public void setDateCreated(String dateCreated) {
-            this.dateCreated = dateCreated;
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
 
         public Boolean getArchived() {
@@ -264,6 +160,207 @@ public class TotalSubscriptionsResponse {
         public void setArchived(Boolean archived) {
             this.archived = archived;
         }
+
+        public Boolean getMonday() {
+            return monday;
+        }
+
+        public void setMonday(Boolean monday) {
+            this.monday = monday;
+        }
+
+        public Boolean getTuesday() {
+            return tuesday;
+        }
+
+        public void setTuesday(Boolean tuesday) {
+            this.tuesday = tuesday;
+        }
+
+        public Boolean getWednesday() {
+            return wednesday;
+        }
+
+        public void setWednesday(Boolean wednesday) {
+            this.wednesday = wednesday;
+        }
+
+        public Boolean getThursday() {
+            return thursday;
+        }
+
+        public void setThursday(Boolean thursday) {
+            this.thursday = thursday;
+        }
+
+        public Boolean getFriday() {
+            return friday;
+        }
+
+        public void setFriday(Boolean friday) {
+            this.friday = friday;
+        }
+
+        public Boolean getSaturday() {
+            return saturday;
+        }
+
+        public void setSaturday(Boolean saturday) {
+            this.saturday = saturday;
+        }
+
+        public Boolean getSunday() {
+            return sunday;
+        }
+
+        public void setSunday(Boolean sunday) {
+            this.sunday = sunday;
+        }
+
+        public List<String> getNotificationIds() {
+            return notificationIds;
+        }
+
+        public void setNotificationIds(List<String> notificationIds) {
+            this.notificationIds = notificationIds;
+        }
+
+        public StopTime getStopTime() {
+            return stopTime;
+        }
+
+        public void setStopTime(StopTime stopTime) {
+            this.stopTime = stopTime;
+        }
+
+        public Integer getCreated() {
+            return created;
+        }
+
+        public void setCreated(Integer created) {
+            this.created = created;
+        }
+
+    }
+
+    public class StopInfo {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("name")
+        @Expose
+        private String name;
+        @SerializedName("lat")
+        @Expose
+        private Double lat;
+        @SerializedName("lon")
+        @Expose
+        private Double lon;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Double getLat() {
+            return lat;
+        }
+
+        public void setLat(Double lat) {
+            this.lat = lat;
+        }
+
+        public Double getLon() {
+            return lon;
+        }
+
+        public void setLon(Double lon) {
+            this.lon = lon;
+        }
+
+    }
+
+    public class StopTime {
+
+        @SerializedName("id")
+        @Expose
+        private String id;
+        @SerializedName("trip_id")
+        @Expose
+        private String tripId;
+        @SerializedName("stop_sequence")
+        @Expose
+        private Integer stopSequence;
+        @SerializedName("stop_info")
+        @Expose
+        private StopInfo stopInfo;
+        @SerializedName("departure")
+        @Expose
+        private String departure;
+        @SerializedName("arrival")
+        @Expose
+        private String arrival;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getTripId() {
+            return tripId;
+        }
+
+        public void setTripId(String tripId) {
+            this.tripId = tripId;
+        }
+
+        public Integer getStopSequence() {
+            return stopSequence;
+        }
+
+        public void setStopSequence(Integer stopSequence) {
+            this.stopSequence = stopSequence;
+        }
+
+        public StopInfo getStopInfo() {
+            return stopInfo;
+        }
+
+        public void setStopInfo(StopInfo stopInfo) {
+            this.stopInfo = stopInfo;
+        }
+
+        public String getDeparture() {
+            return departure;
+        }
+
+        public void setDeparture(String departure) {
+            this.departure = departure;
+        }
+
+        public String getArrival() {
+            return arrival;
+        }
+
+        public void setArrival(String arrival) {
+            this.arrival = arrival;
+        }
+
     }
 }
 

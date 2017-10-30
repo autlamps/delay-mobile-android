@@ -12,7 +12,6 @@ public class TripDetails {
     private String trip;
     private ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
 
-
     public ArrayList<Integer> getTripLocationInArray() {
         return tripLocationInArray;
     }

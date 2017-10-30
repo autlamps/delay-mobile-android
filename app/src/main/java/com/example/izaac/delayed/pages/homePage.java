@@ -1,5 +1,6 @@
 package com.example.izaac.delayed.pages;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -58,6 +59,7 @@ public class homePage extends AppCompatActivity {
     public static String selectedTrip;
     /*Total number of services active*/
     private int numberOfServices;
+    public static String NotificationID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,9 +146,9 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onResponse(Call<DelayResponse> call, Response<DelayResponse> response) {
 
-                System.out.println("Hello");
+              System.out.println("Hello");
                 if (response.isSuccessful()) {
-                    Toast.makeText(homePage.this, "Trips Selected", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(homePage.this, "Trips Selected", Toast.LENGTH_SHORT).show();
                     System.out.println("test");
 
                     for (int i = 0; i < response.body().getResult().getTrips().size(); i++) {
@@ -200,12 +202,13 @@ public class homePage extends AppCompatActivity {
                     else if(tripLocationInArray.size() == 1) {
                         Intent intent = new Intent(homePage.this, TripPage.class);
                         startActivity(intent);
-                       // finish();
+                        finish();
+
                     }
                     else if(tripLocationInArray.size() > 1) {
                         Intent intent = new Intent(homePage.this, DelayListActivity.class);
                         startActivity(intent);
-                       // finish();
+                        finish();
                     }
                 }
                 else {
@@ -265,6 +268,8 @@ public class homePage extends AppCompatActivity {
                     notificationDetails.setType(response.body().getResult().getType());
                     notificationDetails.setName(response.body().getResult().getName());
                     notificationDetails.setValue(response.body().getResult().getValue());
+
+                    NotificationID = response.body().getResult().getId();
 
                     SharedPreferences sharedPreferences = getSharedPreferences("Notification Tokens", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();

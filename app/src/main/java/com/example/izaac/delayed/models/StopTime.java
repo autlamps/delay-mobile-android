@@ -5,59 +5,53 @@ package com.example.izaac.delayed.models;
  */
 
 public class StopTime {
-    private String stoptime_id;
-    private String stop_id;
-    private String stop_name;
-    private String stop_code;
-    private String arrival_time;
-    private String departure_time;
 
-    public String getStoptime_id() {
-        return stoptime_id;
+    private String id;
+    private String trip_id;
+    private int stop_sequence;
+    private String departure;
+    private String arrival;
+
+
+    public String getId() {
+        return id;
     }
 
-    public void setStoptime_id(String stoptime_id) {
-        this.stoptime_id = stoptime_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getStop_id() {
-        return stop_id;
+    public String getTrip_id() {
+        return trip_id;
     }
 
-    public void setStop_id(String stop_id) {
-        this.stop_id = stop_id;
+    public void setTrip_id(String trip_id) {
+        this.trip_id = trip_id;
     }
 
-    public String getStop_name() {
-        return stop_name;
+    public int getStop_sequence() {
+        return stop_sequence;
     }
 
-    public void setStop_name(String stop_name) {
-        this.stop_name = stop_name;
+    public void setStop_sequence(int stop_sequence) {
+        this.stop_sequence = stop_sequence;
     }
 
-    public String getStop_code() {
-        return stop_code;
+    public String getDeparture() {
+        return departure;
     }
 
-    public void setStop_code(String stop_code) {
-        this.stop_code = stop_code;
+    public void setDeparture(String departure) {
+        this.departure = departure;
     }
 
-    public String getArrival_time() {
-        return arrival_time;
+    public String getArrival() {
+        return arrival;
     }
 
-    public void setArrival_time(String arrival_time) {
-        this.arrival_time = arrival_time;
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
     }
 
-    public String getDeparture_time() {
-        return departure_time;
-    }
-
-    public void setDeparture_time(String departure_time) {
-        this.departure_time = departure_time;
-    }
 
 }

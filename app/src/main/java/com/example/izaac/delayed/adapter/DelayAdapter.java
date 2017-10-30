@@ -45,7 +45,6 @@ public class DelayAdapter extends RecyclerView.Adapter<DelayAdapter.DelayHolder>
 
         View view = layoutInflater.inflate(R.layout.list_item, parent, false);
 
-
         return new DelayHolder(view);
     }
 
