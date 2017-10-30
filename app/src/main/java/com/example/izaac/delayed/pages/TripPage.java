@@ -70,7 +70,6 @@ public class TripPage extends AppCompatActivity {
     private float delay;
     private String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"};
     private String[] notifiication_ids;
-
     public static boolean SubscriptionData;
     NextStopDetails nextStopDetails = new NextStopDetails();
 

@@ -14,13 +14,19 @@ import android.widget.Toast;
 
 import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
+import com.example.izaac.delayed.models.AllRoutes;
+import com.example.izaac.delayed.models.AllRoutesRespsonse;
 import com.example.izaac.delayed.models.DelayResponse;
 import com.example.izaac.delayed.models.NextStopDetails;
 import com.example.izaac.delayed.models.NotificationDetails;
 import com.example.izaac.delayed.models.NotificationResponse;
 import com.example.izaac.delayed.models.NotificationToken;
 import com.example.izaac.delayed.models.RouteDetails;
+import com.example.izaac.delayed.models.StopInfo;
+import com.example.izaac.delayed.models.StopTime;
+import com.example.izaac.delayed.models.Subscription;
 import com.example.izaac.delayed.models.TokenResponse;
+import com.example.izaac.delayed.models.TotalSubscriptionsResponse;
 import com.example.izaac.delayed.models.Trip;
 import static com.example.izaac.delayed.pages.LoginPage.DelayTotal;
 import com.example.izaac.delayed.models.TripDetails;
@@ -39,6 +45,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.izaac.delayed.pages.LoginPage.token;
+import static com.example.izaac.delayed.pages.TripPage.StopInfoDetails;
+import static com.example.izaac.delayed.pages.TripPage.StopTimeDetails;
+import static com.example.izaac.delayed.pages.TripPage.SubscriptionDetails;
 
 public class homePage extends AppCompatActivity {
 
@@ -47,6 +56,7 @@ public class homePage extends AppCompatActivity {
     private Button NextButton;
     private Button DelayButton;
     private Button LogOutButton;
+    private Button SubscriptionsButton;
     private Boolean DelaysActive;
     RouteDetails routeDetails = new RouteDetails();
     /*Next Stop Details ArrayList*/
@@ -56,6 +66,7 @@ public class homePage extends AppCompatActivity {
     /*Trip Location In Array Arraylist, used for storing the selected trip objects in a smaller list*/
     public static ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
     /*Stores the users selected trip, stored as a string*/
+    public static boolean SubscriptionData;
     public static String selectedTrip;
     /*Total number of services active*/
     private int numberOfServices;
@@ -81,6 +92,8 @@ public class homePage extends AppCompatActivity {
         DelayButton = (Button) findViewById(R.id.delayListButton);
 
         LogOutButton = (Button) findViewById(R.id.LogoutButton);
+
+        SubscriptionsButton = (Button) findViewById(R.id.SubscriptionsButton);
         //Toast.makeText(homePage.this, sharedPreferences.getString("AUTH_TOKEN", "N/A"), Toast.LENGTH_SHORT).show();
 
         NextButton.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +122,13 @@ public class homePage extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
+            }
+        });
+
+        SubscriptionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSubscriptions();
             }
         });
     }
@@ -306,6 +326,211 @@ public class homePage extends AppCompatActivity {
         }
 
         return numberOfServices;
+    }
+
+    public void setSubscriptions() {
+
+        OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
+
+        okhttpBuilder.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request request = chain.request();
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", sharedPreferences.getString("AUTH_TOKEN", "N/A"));
+
+                return chain.proceed(newRequest.build());
+            }
+        });
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://dev.delayed.nz")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okhttpBuilder.build())
+                .build();
+
+        DelayApi delayApi = retrofit.create(DelayApi.class);
+
+        System.out.println("you shall not pass");
+
+        Call<TotalSubscriptionsResponse> call = delayApi.subscription();
+
+        call.enqueue(new Callback<TotalSubscriptionsResponse>() {
+            @Override
+            public void onResponse(Call<TotalSubscriptionsResponse> call, Response<TotalSubscriptionsResponse> response) {
+
+                System.out.println("Hello");
+                if (response.isSuccessful()) {
+
+                    System.out.println("h");
+
+                    //replace at a later date!!!!!!!
+                    for(int x = 0; x < response.body().getResult().size(); x++) {
+
+                        System.out.println("stop here");
+                        Subscription subscription = new Subscription();
+                        StopTime stopTime = new StopTime();
+                        StopInfo stopInfo = new StopInfo();
+
+                        subscription.setId(response.body().getResult().get(x).getId());
+                        subscription.setTrip_id(response.body().getResult().get(x).getTripId());
+                        subscription.setUser_id(response.body().getResult().get(x).getUserId());
+                        subscription.setArchived(response.body().getResult().get(x).getArchived());
+                        subscription.setMonday(response.body().getResult().get(x).getMonday());
+                        subscription.setTuesday(response.body().getResult().get(x).getTuesday());
+                        subscription.setWednesday(response.body().getResult().get(x).getWednesday());
+                        subscription.setThursday(response.body().getResult().get(x).getThursday());
+                        subscription.setFriday(response.body().getResult().get(x).getFriday());
+                        subscription.setSaturday(response.body().getResult().get(x).getSaturday());
+                        subscription.setSunday(response.body().getResult().get(x).getSunday());
+                        subscription.setDatecreated(response.body().getResult().get(x).getCreated());
+
+                        for(int i = 0; i < response.body().getResult().get(x).getNotificationIds().size(); i ++) {
+
+                            subscription.setNotification_ids(response.body().getResult().get(x).getNotificationIds().get(i));
+                        }
+                        SubscriptionDetails.add(subscription);
+
+
+                        stopTime.setId(response.body().getResult().get(x).getStopTime().getId());
+                        stopTime.setTrip_id(response.body().getResult().get(x).getStopTime().getTripId());
+                        stopTime.setStop_sequence(response.body().getResult().get(x).getStopTime().getStopSequence());
+                        stopTime.setDeparture(response.body().getResult().get(x).getStopTime().getDeparture());
+                        stopTime.setArrival(response.body().getResult().get(x).getStopTime().getArrival());
+                        StopTimeDetails.add(stopTime);
+
+
+                        stopInfo.setId(response.body().getResult().get(x).getStopTime().getStopInfo().getId());
+                        stopInfo.setName(response.body().getResult().get(x).getStopTime().getStopInfo().getName());
+                        stopInfo.setLat(response.body().getResult().get(x).getStopTime().getStopInfo().getLat());
+                        stopInfo.setLon(response.body().getResult().get(x).getStopTime().getStopInfo().getLon());
+                        StopInfoDetails.add(stopInfo);
+
+                    }
+
+
+                    System.out.println("sdsdsds");
+                    SubscriptionData = true;
+                    Intent intent = new Intent(homePage.this, SubscriptionListActivity.class);
+                    startActivity(intent);
+                    // finish();
+
+                }
+                else {
+                    Toast.makeText(homePage.this, "Invalid Subscription", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TotalSubscriptionsResponse> call, Throwable t) {
+                Toast.makeText(homePage.this, "Error......", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public void searchAllRoutes() {
+
+        OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
+
+        okhttpBuilder.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request request = chain.request();
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", sharedPreferences.getString("AUTH_TOKEN", "N/A"));
+
+                return chain.proceed(newRequest.build());
+            }
+        });
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://dev.delayed.nz")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okhttpBuilder.build())
+                .build();
+
+        DelayApi delayApi = retrofit.create(DelayApi.class);
+
+        selectedTrip = Trip.getText().toString().trim();
+
+        Call<AllRoutesRespsonse> call = delayApi.allRoutes();
+
+        call.enqueue(new Callback<AllRoutesRespsonse>() {
+            @Override
+            public void onResponse(Call<AllRoutesRespsonse> call, Response<AllRoutesRespsonse> response) {
+
+                System.out.println("Hello");
+                if (response.isSuccessful()) {
+                    // Toast.makeText(homePage.this, "Trips Selected", Toast.LENGTH_SHORT).show();
+                    System.out.println("test");
+
+                    for (int i = 0; i < response.body().getResult().getRoutes().size(); i++) {
+                        AllRoutes allRoutes = new AllRoutes();
+
+                        allRoutes.setId(response.body().getResult().getRoutes().get(i).getId());
+                        allRoutes.setGtfs_id(response.body().getResult().getRoutes().get(i).getGtfsId());
+                        allRoutes.setAgency_id(response.body().getResult().getRoutes().get(i).getGtfsId());
+                        allRoutes.setShort_name(response.body().getResult().getRoutes().get(i).getShortName());
+                        allRoutes.setLong_name(response.body().getResult().getRoutes().get(i).getLongName());
+                        allRoutes.setRoute_type(response.body().getResult().getRoutes().get(i).getRouteType());
+
+
+
+                        if(BaseTripDetails.get(i).getRoute_short_name().equalsIgnoreCase(selectedTrip) || BaseTripDetails.get(i).getRoute_long_name().equalsIgnoreCase(selectedTrip))
+                        {
+                            tripLocationInArray.add(i);
+                        }
+
+
+                    }
+
+                    //checkNumberOfServices();
+
+                    System.out.println("h");
+
+//                    if(BaseTripDetails.size() == 0) {
+//                        Toast.makeText(homePage.this, "No Trips Delayed At This Time", Toast.LENGTH_SHORT).show();
+//                    }
+
+                    if(DelaysActive == true) {
+                        Intent intent = new Intent(homePage.this, DelayListActivity.class);
+                        startActivity(intent);
+                        //finish();
+                        DelayTotal = true;
+
+                    }
+
+                    //problem occuring!!!!!!!
+                    else if(tripLocationInArray.size() == 1) {
+                        Intent intent = new Intent(homePage.this, TripPage.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                    else if(tripLocationInArray.size() > 1) {
+                        Intent intent = new Intent(homePage.this, DelayListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+                else {
+                    Toast.makeText(homePage.this, "Invalid Trip ID", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllRoutesRespsonse> call, Throwable t) {
+                Toast.makeText(homePage.this, "Error......", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
 }

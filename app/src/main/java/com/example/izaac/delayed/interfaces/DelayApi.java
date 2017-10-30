@@ -1,5 +1,6 @@
 package com.example.izaac.delayed.interfaces;
 
+import com.example.izaac.delayed.models.AllRoutesRespsonse;
 import com.example.izaac.delayed.models.CreateSubscription;
 import com.example.izaac.delayed.models.CreateUser;
 import com.example.izaac.delayed.models.DelayResponse;
@@ -38,5 +39,8 @@ public interface DelayApi {
 
     @GET("subscriptions")
     Call<TotalSubscriptionsResponse> subscription();
+
+    @GET("routes")
+    Call<AllRoutesRespsonse> allRoutes();
 
 }
