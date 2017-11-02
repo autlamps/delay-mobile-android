@@ -40,6 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.izaac.delayed.pages.DelayListActivity.recyclerViewUserSelection;
 import static com.example.izaac.delayed.pages.homePage.BaseTripDetails;
+import static com.example.izaac.delayed.pages.homePage.DelayButtonPress;
 import static com.example.izaac.delayed.pages.homePage.NSDetails;
 import static com.example.izaac.delayed.pages.homePage.NotificationID;
 import static com.example.izaac.delayed.pages.homePage.selectedTrip;
@@ -85,12 +86,20 @@ public class TripPage extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Notification Tokens", Context.MODE_PRIVATE);
         notifiication_ids = new String[]{NotificationID};
 
-        checkSelectedTrip();
-        tripDetails.getTripLocationInArray();
-        convertDelayToMinutes();
+        if(DelayButtonPress == true) {
+            checkSelectedTripFromTotalTrips();
+            tripLocationInArray.add(recyclerViewUserSelection);
+            tripDetails.getTripLocationInArray();
+            convertDelayToMinutes();
+        }
+        else {
+            checkSelectedTrip();
+            tripDetails.getTripLocationInArray();
+            convertDelayToMinutes();
+        }
 
         System.out.println("stop");
-        trip_text = "Trip ID: " + selectedTrip;
+        trip_text = "Trip ID: " + BaseTripDetails.get(recyclerViewUserSelection).getRoute_short_name();
 
         /*Heading Text*/
 
@@ -101,7 +110,7 @@ public class TripPage extends AppCompatActivity {
         /*Setting the trips long name*/
 
         Trip_long_name = (EditText) findViewById(R.id.trip_long_name);
-        Trip_long_name.setText(BaseTripDetails.get(tripLocationInArray.get(recyclerViewUserSelection)).getRoute_long_name(), TextView.BufferType.EDITABLE);
+        Trip_long_name.setText(BaseTripDetails.get(recyclerViewUserSelection).getRoute_long_name(), TextView.BufferType.EDITABLE);
 
         BackButton = (Button) findViewById(R.id.BackButton);
 
@@ -187,6 +196,12 @@ public class TripPage extends AppCompatActivity {
 
     }
 
+    public int checkSelectedTripFromTotalTrips() {
+
+        tripNumber = recyclerViewUserSelection;
+
+        return tripNumber;
+    }
     /*Method Posts Selected Trip To API Service*/
 
     public void PostToApi() {
@@ -215,7 +230,7 @@ public class TripPage extends AppCompatActivity {
 
         System.out.println("stop here");
 
-        CreateSubscription createSubscription = new CreateSubscription(BaseTripDetails.get(tripLocationInArray.get(recyclerViewUserSelection)).getTrip_id(),
+        CreateSubscription createSubscription = new CreateSubscription(BaseTripDetails.get(recyclerViewUserSelection).getTrip_id(),
                 NSDetails.get(tripNumber).getStoptime_id(),days, notifiication_ids);
 
         Call<SubscriptionsResponse> call = delayApi.createSubscription(createSubscription);

@@ -67,6 +67,7 @@ public class homePage extends AppCompatActivity {
     public static ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
     /*Stores the users selected trip, stored as a string*/
     public static boolean SubscriptionData;
+    public static boolean DelayButtonPress;
     public static String selectedTrip;
     /*Total number of services active*/
     private int numberOfServices;
@@ -108,6 +109,7 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DelaysActive = true;
+                DelayButtonPress = true;
                 selectTrip();
             }
         });
