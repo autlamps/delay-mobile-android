@@ -150,6 +150,15 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
             SelectedTripSearch = true;
 
         }
+        else if(SelectedTripSearch == true) {
+            ListItem item = (ListItem) listData.get(p);
+
+            recyclerViewUserSelection = p;
+
+            Intent intent = new Intent(DelayListActivity.this, SelectedRoutePage.class);
+            startActivity(intent);
+            SelectedTripSearch = false;
+        }
         else {
 
             ListItem item = (ListItem) listData.get(p);
