@@ -82,16 +82,21 @@
 
     <Button
         android:id="@+id/BackButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Back" />
+        android:background="@drawable/roundedbutton"
+        android:text="Back"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/SubscribeButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/BackButton"
@@ -100,7 +105,10 @@
         android:layout_alignRight="@+id/BackButton"
         android:layout_alignStart="@+id/BackButton"
         android:layout_marginBottom="18dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Subscribe" />
+        android:background="@drawable/roundedbutton"
+        android:text="Subscribe"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
 </RelativeLayout>

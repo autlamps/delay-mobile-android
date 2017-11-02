@@ -52,7 +52,7 @@ import static com.example.izaac.delayed.pages.TripPage.SubscriptionDetails;
 public class homePage extends AppCompatActivity {
 
     private EditText Trip;
-    private EditText AmountOfTrips;
+    private TextView DelayedButtonText;
     private Button NextButton;
     private Button DelayButton;
     private Button LogOutButton;
@@ -84,9 +84,8 @@ public class homePage extends AppCompatActivity {
         DelayTotal = false;
 
         Trip = (EditText) findViewById(R.id.trip1text);
-        AmountOfTrips = (EditText) findViewById(R.id.tripAmount);
-
-        AmountOfTrips.setText("AT Delays" ,TextView.BufferType.EDITABLE);
+        DelayedButtonText = (TextView) findViewById(R.id.DelayedNameText);
+        //DelayedButtonText.setEnabled(false);
 
         NextButton = (Button) findViewById(R.id.nextButton);
 

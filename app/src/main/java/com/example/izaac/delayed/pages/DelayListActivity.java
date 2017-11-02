@@ -1,6 +1,8 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,7 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
 
     private RecyclerView recyclerView;
     private Button searchButton;
+    private Button LogoutButton;
     private DelayAdapter delayAdapter;
     private ArrayList listData;
     public static int recyclerViewUserSelection;
@@ -46,6 +49,7 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
         System.out.println("stop");
 
         searchButton = (Button) findViewById(R.id.searchButton);
+        LogoutButton = (Button) findViewById(R.id.LogoutButton);
         recyclerView = (RecyclerView) findViewById(R.id.rec_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -60,6 +64,18 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
                 DelayTotal = false;
                 Intent intent = new Intent(DelayListActivity.this, homePage.class);
                 startActivity(intent);
+            }
+        });
+
+        LogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                sharedPreferences.edit().clear().commit();
+
+                Intent intent = new Intent(DelayListActivity.this, LoginPage.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

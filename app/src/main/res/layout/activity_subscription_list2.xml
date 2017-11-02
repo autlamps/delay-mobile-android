@@ -13,33 +13,46 @@
 
     <Button
         android:id="@+id/searchButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="205dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Home" />
+        android:layout_below="@+id/rec_list"
+        android:background="@drawable/roundedbutton"
+        android:text="Home"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/Delays"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="210dp"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/searchButton"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/searchButton"
+        android:layout_alignBottom="@+id/searchButton"
         android:layout_toEndOf="@+id/searchButton"
         android:layout_toRightOf="@+id/searchButton"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Delays" />
+        android:background="@drawable/roundedbutton"
+        android:text="Delays"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/LogoutButton"
-        android:layout_width="340dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rec_list"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Logout" />
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Logout"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
 
 </RelativeLayout>
