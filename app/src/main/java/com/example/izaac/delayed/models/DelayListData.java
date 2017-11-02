@@ -7,6 +7,7 @@ import static com.example.izaac.delayed.pages.TripPage.PostResponseSubTMDetails;
 import static com.example.izaac.delayed.pages.TripPage.StopInfoDetails;
 import static com.example.izaac.delayed.pages.TripPage.StopTimeDetails;
 import static com.example.izaac.delayed.pages.TripPage.SubscriptionDetails;
+import static com.example.izaac.delayed.pages.homePage.AllRoutes;
 import static com.example.izaac.delayed.pages.homePage.BaseTripDetails;
 import static com.example.izaac.delayed.pages.homePage.tripLocationInArray;
 
@@ -41,6 +42,30 @@ public class DelayListData {
 
         return data;
     }
+
+    public static List<ListItem> getAllRouteData() {
+        List<ListItem> data = new ArrayList<>();
+
+        int currentIconPos = 0;
+
+        for(int x = 0; x < tripLocationInArray.size(); x++) {
+            ListItem item = new ListItem();
+
+            item.setImageResId(icons[currentIconPos]);
+
+            currentIconPos++;
+
+            if (currentIconPos > 2) {
+                currentIconPos = 0;
+            }
+
+            item.setTitle(AllRoutes.get(tripLocationInArray.get(x)).getShort_name() + " : " + AllRoutes.get(tripLocationInArray.get(x)).getLong_name());
+            data.add(item);
+        }
+
+        return data;
+    }
+
     public static List<ListItem> getTotalDelayData() {
         List<ListItem> data = new ArrayList<>();
 

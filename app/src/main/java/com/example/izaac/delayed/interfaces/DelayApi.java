@@ -42,5 +42,4 @@ public interface DelayApi {
 
     @GET("routes")
     Call<AllRoutesRespsonse> allRoutes();
-
 }

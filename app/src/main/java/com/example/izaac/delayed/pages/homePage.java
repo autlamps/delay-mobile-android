@@ -1,6 +1,5 @@
 package com.example.izaac.delayed.pages;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,11 +24,10 @@ import com.example.izaac.delayed.models.RouteDetails;
 import com.example.izaac.delayed.models.StopInfo;
 import com.example.izaac.delayed.models.StopTime;
 import com.example.izaac.delayed.models.Subscription;
-import com.example.izaac.delayed.models.TokenResponse;
 import com.example.izaac.delayed.models.TotalSubscriptionsResponse;
 import com.example.izaac.delayed.models.Trip;
 import static com.example.izaac.delayed.pages.LoginPage.DelayTotal;
-import com.example.izaac.delayed.models.TripDetails;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
@@ -44,7 +42,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.izaac.delayed.pages.LoginPage.token;
 import static com.example.izaac.delayed.pages.TripPage.StopInfoDetails;
 import static com.example.izaac.delayed.pages.TripPage.StopTimeDetails;
 import static com.example.izaac.delayed.pages.TripPage.SubscriptionDetails;
@@ -53,7 +50,7 @@ public class homePage extends AppCompatActivity {
 
     private EditText Trip;
     private TextView DelayedButtonText;
-    private Button NextButton;
+    private Button SearchButton;
     private Button DelayButton;
     private Button LogOutButton;
     private Button SubscriptionsButton;
@@ -66,12 +63,14 @@ public class homePage extends AppCompatActivity {
     /*Trip Location In Array Arraylist, used for storing the selected trip objects in a smaller list*/
     public static ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
     /*Stores the users selected trip, stored as a string*/
+    public static ArrayList<AllRoutes> AllRoutes = new ArrayList<AllRoutes>();
     public static boolean SubscriptionData;
     public static boolean DelayButtonPress;
     public static String selectedTrip;
     /*Total number of services active*/
     private int numberOfServices;
     public static String NotificationID;
+    public static boolean AllRoutesSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +81,14 @@ public class homePage extends AppCompatActivity {
         PostNotificationToken();
 
         DelayTotal = false;
+        AllRoutesSearch = false;
+        DelaysActive = false;
 
         Trip = (EditText) findViewById(R.id.trip1text);
         DelayedButtonText = (TextView) findViewById(R.id.DelayedNameText);
         //DelayedButtonText.setEnabled(false);
 
-        NextButton = (Button) findViewById(R.id.nextButton);
+        SearchButton = (Button) findViewById(R.id.nextButton);
 
         DelayButton = (Button) findViewById(R.id.delayListButton);
 
@@ -96,11 +97,13 @@ public class homePage extends AppCompatActivity {
         SubscriptionsButton = (Button) findViewById(R.id.SubscriptionsButton);
         //Toast.makeText(homePage.this, sharedPreferences.getString("AUTH_TOKEN", "N/A"), Toast.LENGTH_SHORT).show();
 
-        NextButton.setOnClickListener(new View.OnClickListener() {
+        SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DelaysActive = false;
-                selectTrip();
+                //DelaysActive = false;
+                AllRoutesSearch = true;
+               // selectTrip();
+                SelectAllTrips();
             }
         });
 
@@ -132,6 +135,87 @@ public class homePage extends AppCompatActivity {
                 setSubscriptions();
             }
         });
+    }
+
+
+    public void SelectAllTrips() {
+        OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder();
+
+        okhttpBuilder.addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                Request request = chain.request();
+                SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                Request.Builder newRequest = request.newBuilder().addHeader("X-DELAY-AUTH", sharedPreferences.getString("AUTH_TOKEN", "N/A"));
+
+                return chain.proceed(newRequest.build());
+            }
+        });
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://dev.delayed.nz")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okhttpBuilder.build())
+                .build();
+
+        DelayApi delayApi = retrofit.create(DelayApi.class);
+
+        tripLocationInArray.clear();
+
+        selectedTrip = Trip.getText().toString().trim();
+
+        Call<AllRoutesRespsonse> call = delayApi.allRoutes();
+
+        call.enqueue(new Callback<AllRoutesRespsonse>() {
+            @Override
+            public void onResponse(Call<AllRoutesRespsonse> call, Response<AllRoutesRespsonse> response) {
+
+                System.out.println("Hello");
+                if (response.isSuccessful()) {
+                    // Toast.makeText(homePage.this, "Trips Selected", Toast.LENGTH_SHORT).show();
+                    System.out.println("test");
+
+                    for(int x = 0; x < response.body().getResult().getRoutes().size(); x++) {
+                        AllRoutes allRoutes = new AllRoutes();
+
+                        allRoutes.setId(response.body().getResult().getRoutes().get(x).getId());
+                        allRoutes.setGtfs_id(response.body().getResult().getRoutes().get(x).getGtfsId());
+                        allRoutes.setAgency_id(response.body().getResult().getRoutes().get(x).getAgencyId());
+                        allRoutes.setShort_name(response.body().getResult().getRoutes().get(x).getShortName());
+                        allRoutes.setLong_name(response.body().getResult().getRoutes().get(x).getLongName());
+                        allRoutes.setRoute_type(response.body().getResult().getRoutes().get(x).getRouteType());
+                        AllRoutes.add(allRoutes);
+
+
+                        if(selectedTrip.equalsIgnoreCase(AllRoutes.get(x).getShort_name()) || selectedTrip.equalsIgnoreCase(AllRoutes.get(x).getLong_name())) {
+                            tripLocationInArray.add(x);
+                        }
+
+                    }
+
+                    System.out.println("S");
+
+                     if(AllRoutesSearch == true) {
+                        Intent intent = new Intent(homePage.this, DelayListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+                else {
+                    Toast.makeText(homePage.this, "Invalid Trip ID", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllRoutesRespsonse> call, Throwable t) {
+                Toast.makeText(homePage.this, "Error......", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     public void selectTrip() {

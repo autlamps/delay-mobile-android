@@ -1,5 +1,6 @@
 package com.example.izaac.delayed.pages;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import com.example.izaac.delayed.models.ListItem;
 import java.util.ArrayList;
 
 import static com.example.izaac.delayed.pages.LoginPage.DelayTotal;
+import static com.example.izaac.delayed.pages.homePage.AllRoutesSearch;
 import static com.example.izaac.delayed.pages.homePage.BaseTripDetails;
 import static com.example.izaac.delayed.pages.homePage.tripLocationInArray;
 
@@ -38,7 +40,10 @@ public class DelayListActivity extends AppCompatActivity implements DelayAdapter
 
         System.out.println("STOP HERE FOR DEBUG");
 
-        if(DelayTotal == true) {
+        if(AllRoutesSearch == true) {
+            listData = (ArrayList) DelayListData.getAllRouteData();
+        }
+        else if(DelayTotal == true) {
             listData = (ArrayList) DelayListData.getTotalDelayData();
 
         }
