@@ -156,7 +156,7 @@ public class SelectedRoutePage extends AppCompatActivity {
         System.out.println("stop here");
 
         CreateSubscription createSubscription = new CreateSubscription(TripStopTimeDetails.get(recyclerViewUserSelection).getTrip_id(),
-                TripIDStopInfo.get(recyclerViewUserSelection).getId(),days, notifiication_ids);
+                TripStopTimeDetails.get(recyclerViewUserSelection).getId(),days, notifiication_ids);
 
         Call<SubscriptionsResponse> call = delayApi.createSubscription(createSubscription);
 

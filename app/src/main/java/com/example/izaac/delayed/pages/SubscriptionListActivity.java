@@ -71,7 +71,7 @@ public class SubscriptionListActivity extends AppCompatActivity implements Delay
         delayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DelayTotal = false;
+                DelayTotal = true;
                 Intent intent = new Intent(SubscriptionListActivity.this, DelayListActivity.class);
                 startActivity(intent);
             }
