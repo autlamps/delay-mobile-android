@@ -3,6 +3,7 @@ package com.example.izaac.delayed.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.izaac.delayed.pages.TripPage.PostResponseSubTMDetails;
 import static com.example.izaac.delayed.pages.TripPage.StopInfoDetails;
 import static com.example.izaac.delayed.pages.TripPage.StopTimeDetails;
 import static com.example.izaac.delayed.pages.TripPage.SubscriptionDetails;
@@ -66,7 +67,7 @@ public class DelayListData {
     public static List<ListItem> getSubscriptionData() {
         List<ListItem> data = new ArrayList<>();
 
-       // String hello = SubscriptionDetails.get(0).getId();
+       // String hello = SubscriptionIsTrue.get(0).getId();
         //String two = StopTimeDetails.get(0).getId();
 
         int currentIconPos = 0;
@@ -83,6 +84,32 @@ public class DelayListData {
             }
 
             item.setTitle(StopInfoDetails.get(y).getName());
+            data.add(item);
+        }
+
+        return data;
+    }
+
+    public static List<ListItem> getDiffSubscriptionData() {
+        List<ListItem> data = new ArrayList<>();
+
+        // String hello = SubscriptionIsTrue.get(0).getId();
+        //String two = StopTimeDetails.get(0).getId();
+
+        int currentIconPos = 0;
+
+        for(int y = 0; y < PostResponseSubTMDetails.size(); y++) {
+            ListItem item = new ListItem();
+
+            item.setImageResId(icons[currentIconPos]);
+
+            currentIconPos++;
+
+            if (currentIconPos > 2) {
+                currentIconPos = 0;
+            }
+
+            item.setTitle(PostResponseSubTMDetails.get(y).getStop_name());
             data.add(item);
         }
 

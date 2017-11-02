@@ -49,7 +49,7 @@ public class Subscriptions extends AppCompatActivity {
     private String Trip1;
     private String Trip2;
     private String Trip3;
-    //public static ArrayList<Subscription> SubscriptionDetails = new ArrayList<Subscription>();
+    //public static ArrayList<Subscription> SubscriptionIsTrue = new ArrayList<Subscription>();
   //  public static ArrayList<StopTime> StopTimeDetails = new ArrayList<StopTime>();
 
 

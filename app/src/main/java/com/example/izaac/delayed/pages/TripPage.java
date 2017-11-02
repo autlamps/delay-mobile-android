@@ -14,14 +14,14 @@ import android.widget.Toast;
 import com.example.izaac.delayed.R;
 import com.example.izaac.delayed.interfaces.DelayApi;
 import com.example.izaac.delayed.models.CreateSubscription;
-import com.example.izaac.delayed.models.Login;
 import com.example.izaac.delayed.models.NextStopDetails;
 import com.example.izaac.delayed.models.RouteDetails;
 import com.example.izaac.delayed.models.StopInfo;
 import com.example.izaac.delayed.models.StopTime;
 import com.example.izaac.delayed.models.Subscription;
+import com.example.izaac.delayed.models.SubscriptionData;
+import com.example.izaac.delayed.models.SubscriptionStopTimeDetails;
 import com.example.izaac.delayed.models.SubscriptionsResponse;
-import com.example.izaac.delayed.models.TokenResponse;
 import com.example.izaac.delayed.models.TotalSubscriptionsResponse;
 import com.example.izaac.delayed.models.Trip;
 import com.example.izaac.delayed.models.TripDetails;
@@ -43,7 +43,6 @@ import static com.example.izaac.delayed.pages.homePage.BaseTripDetails;
 import static com.example.izaac.delayed.pages.homePage.DelayButtonPress;
 import static com.example.izaac.delayed.pages.homePage.NSDetails;
 import static com.example.izaac.delayed.pages.homePage.NotificationID;
-import static com.example.izaac.delayed.pages.homePage.selectedTrip;
 import static com.example.izaac.delayed.pages.homePage.tripLocationInArray;
 
 public class TripPage extends AppCompatActivity {
@@ -71,8 +70,10 @@ public class TripPage extends AppCompatActivity {
     private float delay;
     private String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"};
     private String[] notifiication_ids;
-    public static boolean SubscriptionData;
+    public static boolean SubscriptionIsTrue;
     NextStopDetails nextStopDetails = new NextStopDetails();
+    public static ArrayList<SubscriptionData> PostResponseSubDetails = new ArrayList<SubscriptionData>();
+    public static ArrayList<SubscriptionStopTimeDetails> PostResponseSubTMDetails = new ArrayList<SubscriptionStopTimeDetails>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +161,7 @@ public class TripPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PostToApi();
-                setSubscriptions();
+               // setSubscriptions();
 
             }
         });
@@ -242,11 +243,27 @@ public class TripPage extends AppCompatActivity {
                 System.out.println("Hello");
                 if (response.isSuccessful()) {
                     Toast.makeText(TripPage.this, "Trip Subscribed", Toast.LENGTH_SHORT).show();
-                    finish();
+
+                    SubscriptionData subscriptionData = new SubscriptionData();
+                    SubscriptionStopTimeDetails subscriptionStopTimeDetails = new SubscriptionStopTimeDetails();
+
+                    subscriptionData.setId(response.body().getResult().getId());
+                    subscriptionData.setUser_id(response.body().getResult().getUserId());
+                    subscriptionData.setTrip_id(response.body().getResult().getTripId());
+                    PostResponseSubDetails.add(subscriptionData);
+
+                    subscriptionStopTimeDetails.setStop_name(response.body().getResult().getStopTime().getStopInfo().getName());
+                    PostResponseSubTMDetails.add(subscriptionStopTimeDetails);
+
+                    SubscriptionIsTrue = false;
+                    Intent intent = new Intent(TripPage.this, SubscriptionListActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     Toast.makeText(TripPage.this, "Subscription Incorrect", Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
 
@@ -342,7 +359,7 @@ public class TripPage extends AppCompatActivity {
 
 
                     System.out.println("sdsdsds");
-                    SubscriptionData = true;
+                    SubscriptionIsTrue = true;
                     Intent intent = new Intent(TripPage.this, SubscriptionListActivity.class);
                     startActivity(intent);
                     // finish();

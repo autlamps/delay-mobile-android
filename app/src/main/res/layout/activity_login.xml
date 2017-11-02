@@ -18,6 +18,8 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:capitalize="none"
+        android:digits="abcdefghijklmnopqrstuvwxyz@. "
         android:hint="Email"
         android:layout_marginRight = "20dp"
         android:layout_below="@+id/imageView"

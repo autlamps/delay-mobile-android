@@ -18,7 +18,7 @@ import com.example.izaac.delayed.models.ListItem;
 import java.util.ArrayList;
 
 import static com.example.izaac.delayed.pages.LoginPage.DelayTotal;
-import static com.example.izaac.delayed.pages.TripPage.SubscriptionData;
+import static com.example.izaac.delayed.pages.TripPage.SubscriptionIsTrue;
 
 public class SubscriptionListActivity extends AppCompatActivity implements DelayAdapter.ItemClickCallBack{
 
@@ -39,8 +39,11 @@ public class SubscriptionListActivity extends AppCompatActivity implements Delay
 
         System.out.println("STOP HERE FOR DEBUG");
 
-        if(SubscriptionData == true) {
+        if(SubscriptionIsTrue == true) {
             listData = (ArrayList) DelayListData.getSubscriptionData();
+        }
+        else {
+            listData = (ArrayList) DelayListData.getDiffSubscriptionData();
         }
 
         System.out.println("stop");
