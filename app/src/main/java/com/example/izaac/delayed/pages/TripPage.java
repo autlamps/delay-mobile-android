@@ -173,6 +173,7 @@ public class TripPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TripPage.this, homePage.class);
                 startActivity(intent);
+                finish();
             }
         });
 

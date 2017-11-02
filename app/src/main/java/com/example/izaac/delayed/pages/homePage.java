@@ -63,7 +63,7 @@ public class homePage extends AppCompatActivity {
     /*Trip Location In Array Arraylist, used for storing the selected trip objects in a smaller list*/
     public static ArrayList<Integer> tripLocationInArray = new ArrayList<Integer>();
     /*Stores the users selected trip, stored as a string*/
-    public static ArrayList<AllRoutes> AllRoutes = new ArrayList<AllRoutes>();
+    public static ArrayList<AllRoutes> AllRoutesSelected = new ArrayList<AllRoutes>();
     public static boolean SubscriptionData;
     public static boolean DelayButtonPress;
     public static String selectedTrip;
@@ -186,10 +186,10 @@ public class homePage extends AppCompatActivity {
                         allRoutes.setShort_name(response.body().getResult().getRoutes().get(x).getShortName());
                         allRoutes.setLong_name(response.body().getResult().getRoutes().get(x).getLongName());
                         allRoutes.setRoute_type(response.body().getResult().getRoutes().get(x).getRouteType());
-                        AllRoutes.add(allRoutes);
+                        AllRoutesSelected.add(allRoutes);
 
 
-                        if(selectedTrip.equalsIgnoreCase(AllRoutes.get(x).getShort_name()) || selectedTrip.equalsIgnoreCase(AllRoutes.get(x).getLong_name())) {
+                        if(selectedTrip.equalsIgnoreCase(AllRoutesSelected.get(x).getShort_name()) || selectedTrip.equalsIgnoreCase(AllRoutesSelected.get(x).getLong_name())) {
                             tripLocationInArray.add(x);
                         }
 
@@ -197,7 +197,7 @@ public class homePage extends AppCompatActivity {
 
                     System.out.println("S");
 
-                     if(AllRoutesSearch == true) {
+                    if(AllRoutesSearch == true) {
                         Intent intent = new Intent(homePage.this, DelayListActivity.class);
                         startActivity(intent);
                         finish();

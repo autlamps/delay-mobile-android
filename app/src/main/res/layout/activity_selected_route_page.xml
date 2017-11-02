@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.izaac.delayed.pages.SelectedRoutePage">
+
+    <Button
+        android:id="@+id/SubscribeButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="116dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Subscribe"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/HomeButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Home"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/TripShortNameText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/TripLongNameText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TripShortNameText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/TripTypeText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TripLongNameText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/TripStartTimeText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/TripTypeText"
+        android:layout_alignLeft="@+id/TripTypeText"
+        android:layout_alignRight="@+id/TripTypeText"
+        android:layout_alignStart="@+id/TripTypeText"
+        android:layout_below="@+id/TripTypeText"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textAlignment="center" />
+</RelativeLayout>
