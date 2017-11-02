@@ -71,6 +71,7 @@ public class LoginPage extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(LoginPage.this, createAccount.class);
                     startActivity(intent);
+                    finish();
 
                 }
             });
@@ -78,8 +79,35 @@ public class LoginPage extends AppCompatActivity {
             LoginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   // PostNotificationToken();
-                    login();
+                    LoginEmail  =  UserEmail.getText().toString().trim();
+                    LoginPassword = UserPassword.getText().toString().trim();
+
+                    if(LoginEmail.isEmpty() && LoginPassword.isEmpty()) {
+                        Toast.makeText(LoginPage.this, "Login Fields Not Filled", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                        sharedPreferences.edit().clear().commit();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                    else if(LoginEmail.isEmpty()) {
+                        Toast.makeText(LoginPage.this, "Email Not Entered", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                        sharedPreferences.edit().clear().commit();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                    else if(LoginPassword.isEmpty()) {
+                        Toast.makeText(LoginPage.this, "Password Not Entered", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                        sharedPreferences.edit().clear().commit();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                    else {
+                        login();
+                    }
+
+
                 }
             });
 

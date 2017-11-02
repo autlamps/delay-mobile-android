@@ -1,6 +1,8 @@
 package com.example.izaac.delayed.pages;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.izaac.delayed.pages.LoginPage.token;
+
 public class createAccount extends AppCompatActivity {
 
     private ProgressBar progressBar;
@@ -29,6 +33,7 @@ public class createAccount extends AppCompatActivity {
     private EditText EmailText;
     private EditText PasswordText;
     private EditText RePasswordText;
+    private Button BackButton;
     private String Name;
     private String Email;
     private String Password;
@@ -48,6 +53,7 @@ public class createAccount extends AppCompatActivity {
         RePasswordText = (EditText) findViewById(R.id.RetypePassword);
 
         Button CreateAccount = (Button) findViewById(R.id.CreateAccountButton);
+        BackButton = (Button) findViewById(R.id.BackButton);
 
         CreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +62,17 @@ public class createAccount extends AppCompatActivity {
                 if(PasswordMatch == true) {
                     RegisterUser();
                 }
-
             }
         });
 
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(createAccount.this, LoginPage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     /*this methood is used to register a user*/
@@ -87,8 +100,12 @@ public class createAccount extends AppCompatActivity {
                 System.out.println("Hello");
                 if (response.isSuccessful()) {
                     Toast.makeText(createAccount.this, "Account Created", Toast.LENGTH_SHORT).show();
+                    SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("AUTH_TOKEN", token);
+                    editor.commit();
 
-                    Intent intent = new Intent(createAccount.this, LoginPage.class);
+                    Intent intent = new Intent(createAccount.this, homePage.class);
                     startActivity(intent);
                     finish();
                 }
@@ -115,21 +132,54 @@ public class createAccount extends AppCompatActivity {
         Email = EmailText.getText().toString().trim();
         Password = PasswordText.getText().toString().trim();
         RePassword = RePasswordText.getText().toString().trim();
+        PasswordMatch = false;
 
-        if(Name.equalsIgnoreCase("")) {
+        if(Name.isEmpty() && Email.isEmpty() && Password.isEmpty() && RePassword.isEmpty()) {
+            Toast.makeText(createAccount.this, "All Fields Are Empty", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            finish();
+            startActivity(getIntent());
+        }
+        else if(Name.isEmpty()) {
             Toast.makeText(createAccount.this, "Name is Empty", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            finish();
+            startActivity(getIntent());
         }
-        if(Email.equalsIgnoreCase("")) {
+        else if(Email.isEmpty()) {
             Toast.makeText(createAccount.this, "Email is Empty", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            finish();
+            startActivity(getIntent());
         }
-        if(Password.equalsIgnoreCase("")) {
+        else if(Password.isEmpty()) {
             Toast.makeText(createAccount.this, "Password is Empty", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            finish();
+            startActivity(getIntent());
         }
-        if(Password != null) {
-            if(Password.equalsIgnoreCase(RePassword)) {
-                PasswordMatch = true;
-            }
+        else if(RePassword.isEmpty()) {
+            Toast.makeText(createAccount.this, "ReType Password is Empty", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            finish();
+            startActivity(getIntent());
         }
+        else if(Password.equalsIgnoreCase(RePassword)) {
+            PasswordMatch = true;
+        }
+        else if(PasswordMatch == false) {
+            Toast.makeText(createAccount.this, "Passwords Don't Match", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Auth Tokens", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            finish();
+            startActivity(getIntent());
+        }
+
 
     }
 

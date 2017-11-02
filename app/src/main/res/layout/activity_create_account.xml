@@ -3,7 +3,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="530dp"
+    android:layout_height="550dp"
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
 
@@ -11,66 +11,80 @@
         android:id="@+id/Name"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_alignLeft="@+id/Email"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Email"
+        android:layout_marginTop="57dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
-        tools:text="Name"
-        android:layout_marginTop="57dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/Email"
-        android:layout_alignStart="@+id/Email" />
+        tools:text="Name" />
 
     <EditText
         android:id="@+id/Email"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_below="@+id/Name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
-        tools:text="Email"
-        android:layout_below="@+id/Name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        tools:text="Email" />
 
     <EditText
         android:id="@+id/Password"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_alignLeft="@+id/Email"
+        android:layout_alignStart="@+id/Email"
+        android:layout_below="@+id/Email"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"
-        tools:text="Password"
         android:password="true"
-        android:layout_below="@+id/Email"
-        android:layout_alignLeft="@+id/Email"
-        android:layout_alignStart="@+id/Email"
-        android:layout_marginTop="28dp" />
+        tools:text="Password" />
 
     <Button
         android:id="@+id/CreateAccountButton"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"
         android:background="@android:color/holo_blue_dark"
         android:onClick="onButtonClick"
-        android:text="Create Account" />
+        android:text="Create Account"
+        android:layout_below="@+id/RetypePassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp" />
 
     <EditText
         android:id="@+id/RetypePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/Password"
         android:layout_alignLeft="@+id/Password"
+        android:layout_alignRight="@+id/Password"
         android:layout_alignStart="@+id/Password"
         android:layout_below="@+id/Password"
-        android:password="true"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="RetypePassword"
-        android:layout_alignRight="@+id/Password"
-        android:layout_alignEnd="@+id/Password" />
+        android:inputType="textPersonName"
+        android:password="true" />
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/CreateAccountButton"
+        android:layout_alignLeft="@+id/CreateAccountButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/CreateAccountButton"
+        android:layout_alignStart="@+id/CreateAccountButton"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Back"
+        android:textSize="14sp" />
 
 
 </RelativeLayout>
