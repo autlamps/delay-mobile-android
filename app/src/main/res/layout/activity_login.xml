@@ -10,43 +10,43 @@
     android:id="@+id/relativeLayout">
 
 
-
     <EditText
+        android:id="@+id/Email"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:id="@+id/Email"
+        android:layout_alignLeft="@+id/Password"
+        android:layout_alignStart="@+id/Password"
+        android:layout_below="@+id/imageView"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:capitalize="none"
         android:digits="abcdefghijklmnopqrstuvwxyz@. "
-        android:hint="Email"
-        android:layout_marginRight = "20dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/Password"
-        android:layout_alignStart="@+id/Password" />
+        android:ems="10"
+        android:hint="Email:"
+        android:inputType="textPersonName"
+        android:textAlignment="textStart" />
 
     <EditText
         android:id="@+id/Password"
-        android:password="true"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="180px"
         android:layout_below="@+id/Email"
+        android:layout_marginLeft="180px"
         android:layout_marginTop="34dp"
         android:ems="10"
+        android:hint="Password:"
         android:inputType="textPersonName"
-        android:hint="Password"/>
+        android:password="true" />
 
 
     <Button
         android:id="@+id/Login"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_below="@+id/Password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/roundedbutton"
         android:text="Login"
         android:textColor="@android:color/background_light"
@@ -55,18 +55,18 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="120dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="17dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/NewAccount"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignLeft="@+id/Login"
         android:layout_alignStart="@+id/Login"
         android:layout_below="@+id/Login"
@@ -82,11 +82,10 @@
         android:id="@+id/LoginLaterButton"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="26dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
         android:background="@drawable/roundedbutton"
         android:text="Log In Later"
         android:textColor="@android:color/background_light"

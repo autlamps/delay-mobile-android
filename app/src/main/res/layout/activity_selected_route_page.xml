@@ -31,7 +31,7 @@
         android:layout_marginBottom="47dp"
         android:background="@drawable/roundedbutton"
         android:text="Home"
-        android:textColor="@android:color/background_light"
+        android:textColor="@drawable/busicon"
         android:textSize="18sp"
         android:textStyle="italic" />
 
